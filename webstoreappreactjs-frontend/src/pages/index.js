@@ -5,3 +5,4 @@ export {ProductDetail} from './ProductDetail';
 export {Orders} from './Orders';
 export {ShoppingCart} from './ShoppingCart';
 export {Cart} from './Cart';
+export {Main} from './Main';
