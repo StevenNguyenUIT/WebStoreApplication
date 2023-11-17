@@ -1,8 +1,8 @@
 package com.webstore.service.dto;
 
-import com.webstore.domain.Review;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDTO {
@@ -10,15 +10,15 @@ public class ProductDTO {
     private String productNumber;
     @NotNull
     private String name;
-    private String price; //per unit
+    private double price; //per unit
     private String description;
     private int numberInStock;
-    private List<ReviewDTO> reviewList;
+    private List<ReviewDTO> reviewList = new ArrayList<>();
 
     public ProductDTO() {
     }
 
-    public ProductDTO(String productNumber, String productName, String price, String description, int numberInStock) {
+    public ProductDTO(String productNumber, String productName, double price, String description, int numberInStock) {
         this.productNumber = productNumber;
         this.name = productName;
         this.price = price;
@@ -42,11 +42,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

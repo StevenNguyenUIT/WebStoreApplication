@@ -3,6 +3,7 @@ package com.webstore.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
@@ -10,15 +11,15 @@ public class Product {
     @Id
     private String productNumber;
     private String name;
-    private String price; //per unit
+    private double price; //per unit
     private String description;
     private int numberInStock;
-    private List<Review> reviewList;
+    private List<Review> reviewList = new ArrayList<>();
 
     public Product() {
     }
 
-    public Product(String productNumber, String productName, String price, String description, int numberInStock) {
+    public Product(String productNumber, String productName, double price, String description, int numberInStock) {
         this.productNumber = productNumber;
         this.name = productName;
         this.price = price;
@@ -42,11 +43,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -64,5 +65,13 @@ public class Product {
 
     public void setNumberInStock(int numberInStock) {
         this.numberInStock = numberInStock;
+    }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 }

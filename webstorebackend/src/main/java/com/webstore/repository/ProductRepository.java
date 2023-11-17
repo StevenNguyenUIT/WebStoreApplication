@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
     Product findByProductNumber(String productNumber);
-    Product findByName(String productName);//find by exact name, return a product
-    List<Product> findAllByName(String productName);// return a list of products same name
-    void removeByProductNumber(String productNumber);
+//    Product findByName(String productName);//find by exact name, return a product
+    List<Product> findByNameContaining(String productName);// return a list of products contains name
+//    void removeByProductNumber(String productNumber);
 }

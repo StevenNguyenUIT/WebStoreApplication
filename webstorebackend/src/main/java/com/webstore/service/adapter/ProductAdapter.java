@@ -1,16 +1,35 @@
 package com.webstore.service.adapter;
 
 import com.webstore.domain.Product;
+import com.webstore.domain.Review;
 import com.webstore.service.dto.ProductDTO;
+import com.webstore.service.dto.ReviewDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductAdapter {
 
     public static Product toObj(ProductDTO dto) {
-        //TODO
-        return new Product();
+        Product p = null;
+        if (dto != null) {
+            p = new Product(dto.getProductNumber(), dto.getName(), dto.getPrice(), dto.getDescription(), dto.getNumberInStock());
+        }
+        return p;
     }
     public static ProductDTO toDto(Product obj) {
-        //TODO
-        return new ProductDTO();
+        ProductDTO dto = null;
+        if (obj != null) {
+            dto = new ProductDTO(obj.getProductNumber(), obj.getName(), obj.getPrice(), obj.getDescription(), obj.getNumberInStock());
+            List<Review> reviewList = obj.getReviewList();
+            List<ReviewDTO> reviewDTOs = new ArrayList<>();
+            if (!reviewList.isEmpty()) {
+                for (Review review : reviewList) {
+                    reviewDTOs.add(ReviewAdapter.toDto(review));
+                }
+            }
+            dto.setReviewList(reviewDTOs);
+        }
+        return dto;
     }
 }
