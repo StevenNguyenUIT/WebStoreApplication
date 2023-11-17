@@ -57,8 +57,8 @@ export const Products = () => {
             <br/>
             <div>
                 <table border={1}>
-                    <thead><th>Product Number</th><th>Name</th><th>Price</th><th>Description</th></thead>
                     <tbody>
+                        <tr><th>Product Number</th><th>Name</th><th>Price</th><th>Description</th></tr>
                     {productList.map(product => (
                         <tr key={product.productnumber}>
                             <td>{product.productnumber}</td>
@@ -75,50 +75,52 @@ export const Products = () => {
                 <h1>Add a new Product</h1>
                 <form onSubmit={handleSubmit}>
                     <table>
-                        <tr>
-                            <td>Product Number</td>
-                            <td><input
-                                type='text'
-                                placeholder='productNumber'
-                                name='productnumber'
-                                value={product.productnumber}
-                                onChange={handleFieldChange}
-                            /></td>
-                        </tr>
-                        <tr>
-                            <td>Product Name</td>
-                            <td><input
-                                type='text'
-                                placeholder='productNumber'
-                                name='name'
-                                value={product.name}
-                                onChange={handleFieldChange}
-                            /></td>
-                        </tr>
-                        <tr>
-                            <td>Product Price</td>
-                            <td><input
-                                type='text'
-                                placeholder='price'
-                                name='price'
-                                value={product.price}
-                                onChange={handleFieldChange}
-                            /></td>
-                        </tr>
-                        <tr>
-                            <td>Product Description</td>
-                            <td><input
-                                type='text'
-                                placeholder='description'
-                                name='description'
-                                value={product.description}
-                                onChange={handleFieldChange}
-                            /></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><button type='submit'>Add Product</button></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>Product Number</td>
+                                <td><input
+                                    type='text'
+                                    placeholder='productNumber'
+                                    name='productnumber'
+                                    value={product.productnumber}
+                                    onChange={handleFieldChange}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td>Product Name</td>
+                                <td><input
+                                    type='text'
+                                    placeholder='productNumber'
+                                    name='name'
+                                    value={product.name}
+                                    onChange={handleFieldChange}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td>Product Price</td>
+                                <td><input
+                                    type='text'
+                                    placeholder='price'
+                                    name='price'
+                                    value={product.price}
+                                    onChange={handleFieldChange}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td>Product Description</td>
+                                <td><input
+                                    type='text'
+                                    placeholder='description'
+                                    name='description'
+                                    value={product.description}
+                                    onChange={handleFieldChange}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button type='submit'>Add Product</button></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </form>
             </div>
