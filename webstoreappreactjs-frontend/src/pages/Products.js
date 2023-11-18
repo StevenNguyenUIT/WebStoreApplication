@@ -31,13 +31,15 @@ export const Products = () => {
     }
     const searchProduct = () =>{
         console.log(productFilter);
-        client.get("/" + productFilter)
-        .then((response)=>{
-            //map data to array 
-            let array = new Array(response.data);
-            // console.log(array);
-            setProductList(array);
-        })
+        if(productFilter){
+            client.get("/" + productFilter)
+            .then((response)=>{
+                //map data to array 
+                let array = new Array(response.data);
+                // console.log(array);
+                setProductList(array);
+            })
+        }
     }
 
     const addProduct = (product) => {
