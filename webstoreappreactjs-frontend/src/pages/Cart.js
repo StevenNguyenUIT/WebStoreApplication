@@ -8,11 +8,11 @@ export const Cart = () => {
         dispatch({type: 'decrement'});
     }
     let cartpage = (
-        <>
+        <div>
             <h1>This is CartPage</h1>
-            <p>cart: {cart}</p>
+            <p>cart:{cart}</p>
             <button onClick={decrementHandler}>decrement</button>
-        </>
+        </div>
     );
     return cartpage;
 }

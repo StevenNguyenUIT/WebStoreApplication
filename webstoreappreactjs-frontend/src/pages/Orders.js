@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 
 export const Orders = () =>{
+    const navigate = useNavigate();
     //initial list of order
     const initialOrderList = [
         {orderId: "A134", name: "Order1", status: "PLACED"},
@@ -8,6 +10,10 @@ export const Orders = () =>{
         {orderId: "A136", name: "Order3", status: "DELIVERED"}
     ]
     const [orderList, setOrderList] = useState(initialOrderList);
+
+    const viewDetail = (e) => {
+        navigate('/orderdetail', {state:{orderId: e.target.value}});
+    }
     let Orders = (
         <div>
             <h1> Order Management</h1>
@@ -32,6 +38,7 @@ export const Orders = () =>{
                             <td>{order.orderId}</td>
                             <td>{order.name}</td>
                             <td>{order.status}</td>
+                            <td><button onClick={viewDetail} value={order.orderId}>View Detail</button></td>
                         </tr>
                     ))}
                 </tbody>

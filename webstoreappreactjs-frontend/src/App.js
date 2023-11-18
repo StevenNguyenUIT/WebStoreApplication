@@ -1,6 +1,6 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {Products, ProductDetail, Orders, ShoppingCart, Cart, Main} from './pages'
+import {Products, ProductDetail, Orders, ShoppingCart, Cart, Main, OrderDetail} from './pages'
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
           <Route path='/products' element={<Products/>}/>
           <Route path='/productdetail' element={<ProductDetail/>}/>
           <Route path='/orders' element={<Orders/>}/>
+          <Route path='/orderdetail' element={<OrderDetail/>}/>
           <Route path='/shoppings' element={<ShoppingCart/>}/>
           <Route path='/cart' element={<Cart/>}/>
         </Routes>

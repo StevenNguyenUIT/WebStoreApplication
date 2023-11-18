@@ -10,8 +10,8 @@ export const ProductDetail = () => {
 
     //test product detail from local database
     const location = useLocation();
-    let currentProductNumber = location.state.productnumber;
-    const currentProduct = {productnumber: currentProductNumber, name: "test1", price: "422", description: "this is a test"};
+    let currentProductNumber = location.state.productNumber;
+    const currentProduct = {productNumber: currentProductNumber, name: "test1", price: "422", description: "this is a test"};
     const [updateProduct, setUpdateProduct] = useState(currentProduct);
     const handleFieldChange = (e) => {
         setUpdateProduct({...e,[e.target.name]:e.target.value});
@@ -27,7 +27,7 @@ export const ProductDetail = () => {
         <div>
             <h1>Product Detail</h1>
             <h1>Product Number</h1>
-            <p>{updateProduct.productnumber}</p>
+            <p>{updateProduct.productNumber}</p>
             <form onSubmit={handleSubmit}>
                 <table>
                     <tbody>
@@ -35,8 +35,8 @@ export const ProductDetail = () => {
                             <td>Product Number:</td>
                             <td><input
                                 type="text"
-                                value={updateProduct.productnumber}
-                                name="productnumber"
+                                value={updateProduct.productNumber}
+                                name="productNumber"
                                 onChange={handleFieldChange}
                             /></td>
                         </tr>
