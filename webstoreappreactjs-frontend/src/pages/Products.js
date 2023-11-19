@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import {useForm} from 'react-hook-form';
 
 export const Products = () => {
     const navigate = useNavigate();
     const cleanproduct = {productNumber:"", name:"", price:"",description:"",numberInStock:"",reviewList:[]};
     const [product, setProduct] = useState(cleanproduct);
     const [productFilter, setProductFilter] = useState('');
-    //Create productList for testing
-    // const initialList = [
-    //     {productnumber:"123", name:"Iphone", price:"1000",description:"Iphone 15"},
-    //     {productnumber:"124", name:"Computer", price:"3000",description:"MacPro"}
-    // ]
     const [productList, setProductList] = useState([]);
+    const [searchMessage, setSearchMessage] = useState('');
+
+    //validate react-hook-form
+    const {register, handleSubmit, formState: {errors}} = useForm();
     React.useEffect(()=>{
         loadProducts();
     }, []);
@@ -30,15 +30,19 @@ export const Products = () => {
         })
     }
     const searchProduct = () =>{
-        console.log(productFilter);
-        if(productFilter){
+        const isExistsProduct = productList.filter(e=>e.productNumber===productFilter);
+        if(isExistsProduct.length !=0){
             client.get("/" + productFilter)
             .then((response)=>{
                 //map data to array 
                 let array = new Array(response.data);
                 // console.log(array);
                 setProductList(array);
+                setSearchMessage("");
             })
+        } else {
+            setSearchMessage(<a style={{color:"red"}}>This Product Number is incorrect, show all</a>);
+            loadProducts();
         }
     }
 
@@ -59,8 +63,9 @@ export const Products = () => {
         });
     }
 
-    const handleSubmit = (e) => {
-        console.log("handleSubmit");
+    const onSubmit = (product) => {
+        console.log(product);
+        console.log("onSubmit");
         if (product){
             //use for test list
             setProductList(productList.concat(product));
@@ -72,23 +77,18 @@ export const Products = () => {
         //clear product
         setProduct(cleanproduct);
 
-        //prevent Post request
-        e.preventDefault();
     }
 
     const handleFieldChange = (e) =>{
         setProduct({...product,[e.target.name]:e.target.value});
     }
 
-    // const handleRemove = (e) => {
-    //     let newProductList = productList.filter(pro=>pro.productnumber !== e.target.value)
-    //     setProductList(newProductList);
-    // }
-
     const handleViewDetail = (e) => {
-        console.log(e.target);
+        // console.log(e.target);
+        const product = productList.filter(pro=>pro.productNumber===e.target.value)
+        console.log(product);
         //navigate to detail page
-        navigate('/productdetail', {state: {productNumber:e.target.value}});
+        navigate('/productdetail', {state: {productNumber:e.target.value, product: product}});
     }
 
     let products = (
@@ -98,12 +98,14 @@ export const Products = () => {
                 Filter by ProductNumber 
                 <input
                     type='text'
-                    placeholder='Product Number'
+                    placeholder='ex: P1234567'
                     value={productFilter}
                     onChange={e=>setProductFilter(e.target.value)}
                 />
                 <button onClick={searchProduct}>Search</button>
+                {searchMessage}
             </div>
+            
             <br/>
             <div>
                 <table border={1}>
@@ -124,7 +126,7 @@ export const Products = () => {
                 </table>
 
                 <h1>Add a new Product</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <table>
                         <tbody>
                             <tr>
@@ -133,9 +135,18 @@ export const Products = () => {
                                     type='text'
                                     placeholder='productNumber'
                                     name='productNumber'
-                                    value={product.productNumber}
+                                    // value={product.productNumber}
                                     onChange={handleFieldChange}
-                                /></td>
+                                    {...register("productNumber",{
+                                        required: "Product Number is required.",
+                                        minLength:{
+                                            value:8,
+                                            message: "Product Number should at-least 8 characters."
+                                        }
+                                    })}
+                                />
+                                </td>
+                            <td>{errors.productNumber && (<p style={{color: "red"}}>{errors.productNumber.message}</p>)}</td>
                             </tr>
                             <tr>
                                 <td>Product Name</td>
@@ -143,9 +154,14 @@ export const Products = () => {
                                     type='text'
                                     placeholder='product Name'
                                     name='name'
-                                    value={product.name}
+                                    // value={product.name}
                                     onChange={handleFieldChange}
-                                /></td>
+                                    {...register("name",{
+                                        required: "Product Name is required."
+                                    })}
+                                />
+                                </td>
+                            <td>{errors.name && (<p style={{color: "red"}}>{errors.name.message}</p>)}</td>
                             </tr>
                             <tr>
                                 <td>Product Price</td>
@@ -153,9 +169,22 @@ export const Products = () => {
                                     type='text'
                                     placeholder='price'
                                     name='price'
-                                    value={product.price}
+                                    // value={product.price}
                                     onChange={handleFieldChange}
-                                /></td>
+                                    {...register("price",{
+                                        required: "price is required.",
+                                        pattern:{
+                                            value: /^[0-9]{1,}$/,
+                                            message: "please input number"
+                                        },
+                                        min:{
+                                            value:1,
+                                            message: "price should at-least 1"
+                                        }
+                                    })}
+                                />
+                                </td>
+                            <td>{errors.price && (<p style={{color: "red"}}>{errors.price.message}</p>)}</td>
                             </tr>
                             <tr>
                                 <td>Product Description</td>
@@ -163,9 +192,14 @@ export const Products = () => {
                                     type='text'
                                     placeholder='description'
                                     name='description'
-                                    value={product.description}
+                                    // value={product.description}
                                     onChange={handleFieldChange}
-                                /></td>
+                                    {...register("description",{
+                                        required: "Product Name is required."
+                                    })}
+                                />
+                                </td>
+                            <td>{errors.description && (<p style={{color: "red"}}>{errors.description.message}</p>)}</td>
                             </tr>
                             <tr>
                                 <td>Number In Stock</td>
@@ -173,9 +207,22 @@ export const Products = () => {
                                     type='text'
                                     placeholder='Number in Stock'
                                     name='numberInStock'
-                                    value={product.numberInStock}
+                                    // value={product.numberInStock}
                                     onChange={handleFieldChange}
-                                /></td>
+                                    {...register("numberInStock",{
+                                        required: "numberInStock is required.",
+                                        pattern:{
+                                            value: /^[0-9]{1,}$/,
+                                            message: "please input number"
+                                        },
+                                        min:{
+                                            value:0,
+                                            message: "numberInStock should at-least 0"
+                                        }
+                                    })}
+                                />
+                                </td>
+                            <td>{errors.numberInStock && (<p style={{color: "red"}}>{errors.numberInStock.message}</p>)}</td>
                             </tr>
                             <tr>
                                 <td></td>
