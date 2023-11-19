@@ -45,6 +45,11 @@ export const ShoppingCart = () => {
     const incrementHandler = () =>{
         dispatch({type: 'increment'});
     }
+
+    const goToCartInfo = () => {
+      navigate("/cart");
+    }
+
     let shoppingcart = (
         <div>
             <h1>This is Shopping Cart page</h1>
@@ -78,6 +83,8 @@ export const ShoppingCart = () => {
                     ))}
                 </tbody>
             </table>
+            <br/>
+            <button onClick={goToCartInfo}>GoToCartInfo</button>
         </div>
     );
     return shoppingcart;

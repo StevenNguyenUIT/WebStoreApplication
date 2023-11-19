@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 export const Orders = () =>{
     const navigate = useNavigate();
     //initial list of order
-    const initialOrderList = [
-        {orderId: "A134", name: "Order1", status: "PLACED"},
-        {orderId: "A135", name: "Order2", status: "SHIPPED"},
-        {orderId: "A136", name: "Order3", status: "DELIVERED"}
-    ]
-    const [orderList, setOrderList] = useState(initialOrderList);
+    const [orderList, setOrderList] = useState([]);
+
+    const client = axios.create({
+        baseURL:"http://localhost:8080/api/orders"
+    })
+
+    React.useEffect(()=>{
+        loadOrders();
+    }, [])
+
+    const loadOrders = ()=>{
+        const orders = client.get()
+        .then((response)=>{
+            // console.log(response.data.orderList);
+            setOrderList(response.data.orderList)
+        })
+    }
 
     const viewDetail = (e) => {
         navigate('/orderdetail', {state:{orderId: e.target.value}});
@@ -31,13 +43,14 @@ export const Orders = () =>{
             <table border={1}>
                 <tbody>
                     <tr>
-                        <th>OrderID</th><th>OrderName</th><th>Status</th>
+                        <th>OrderID</th><th>Date</th><th>Status</th><th>Total Amount</th>
                     </tr>
                     {orderList.map((order) => (
                         <tr key={order.orderId}>
                             <td>{order.orderId}</td>
-                            <td>{order.name}</td>
+                            <td>{order.date}</td>
                             <td>{order.status}</td>
+                            <td>{order.totalAmount}</td>
                             <td><button onClick={viewDetail} value={order.orderId}>View Detail</button></td>
                         </tr>
                     ))}
