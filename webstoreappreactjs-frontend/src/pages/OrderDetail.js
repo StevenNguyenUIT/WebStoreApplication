@@ -4,7 +4,41 @@ import axios from "axios";
 
 export const OrderDetail = () => {
     const location = useLocation();
-    const [order, setOrder] = useState([]);
+    const initdata = {
+      "orderId": "",
+      "status": "",
+      "date": "",
+      "totalAmount": 0,
+      "personalInfo": {
+          "name": "",
+          "email": "",
+          "phone": "",
+          "street": "",
+          "city": "",
+          "zip": ""
+      },
+      "paymentInfo": {
+          "creditCardType": "",
+          "number": "",
+          "validDate": "",
+          "validationCode": ""
+      },
+      "orderItemList": [
+          {
+              "productNumber": "",
+              "name": "",
+              "quantity": 0,
+              "price": 0
+          },
+          {
+              "productNumber": "0",
+              "name": "",
+              "quantity": 0,
+              "price": 0
+          }
+      ]
+  }
+    const [order, setOrder] = useState(initdata);
     const orderId = location.state.orderId;
     React.useEffect(()=>{
       loadOrder();
@@ -14,7 +48,7 @@ export const OrderDetail = () => {
       baseURL:"http://localhost:8080/api/orders"
     })
 
-    const loadOrder = () => {
+    const loadOrder = async() => {
       const order = client.get("/" + orderId)
       .then((response)=>{
         console.log(response.data);
@@ -58,7 +92,56 @@ export const OrderDetail = () => {
             <div>
                 Change Status:
                 <button onClick={()=>MoveToOtherStatus("SHIPPED")}>MoveToSHIPPED</button>
+                &nbsp;
                 <button onClick={()=>MoveToOtherStatus("DELIVERED")}>MoveToDELIVERED</button>
+            </div>
+
+            <div>
+              <h3>Personal Information</h3>
+                <table border={1}>
+                  <tbody>
+                    <tr><td>name</td><td>email</td><td>phone</td><td>street</td><td>city</td><td>zip</td></tr>
+                    <tr>
+                      <td>{order.personalInfo.name}</td>
+                      <td>{order.personalInfo.email}</td>
+                      <td>{order.personalInfo.phone}</td>
+                      <td>{order.personalInfo.street}</td>
+                      <td>{order.personalInfo.city}</td>
+                      <td>{order.personalInfo.zip}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div>
+              <h3>Payment Information</h3>
+                <table border={1}>
+                  <tbody>
+                    <tr><td>creditCardType</td><td>number</td><td>validDate</td><td>validationCode</td></tr>
+                    <tr>
+                      <td>{order.paymentInfo.creditCardType}</td>
+                      <td>{order.paymentInfo.number}</td>
+                      <td>{order.paymentInfo.validDate}</td>
+                      <td>{order.paymentInfo.validationCode}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+
+            <div>
+              <h3>order Item List</h3>
+                <table border={1}>
+                  <tbody>
+                    <tr><td>productNumber</td><td>name</td><td>quantity</td><td>price</td></tr>
+                    {order.orderItemList.map(item=>(
+                      <tr key={item.productNumber}>
+                        <td>{item.productNumber}</td>
+                        <td>{item.name}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.price}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
             </div>
         </div>
     );
