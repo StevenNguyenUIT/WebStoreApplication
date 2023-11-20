@@ -6,6 +6,7 @@ export const Orders = () =>{
     const navigate = useNavigate();
     //initial list of order
     const [orderList, setOrderList] = useState([]);
+    const [status, setStatus] = useState('All');
 
     const client = axios.create({
         baseURL:"http://localhost:8080/api/orders"
@@ -22,6 +23,24 @@ export const Orders = () =>{
             setOrderList(response.data.orderList)
         })
     }
+    const searchOrder = (value)=>{
+        const orders = client.get("/search?status="+value)
+        .then((response)=>{
+            // console.log(response.data.orderList);
+            setOrderList(response.data.orderList);
+        })
+    }
+    const searchStatus = () => {
+        if(status==="PLACED"){
+            searchOrder(status);
+        } else if(status==="SHIPPED"){
+            searchOrder(status);
+        } else if(status==="DELIVERED"){
+            searchOrder(status);
+        } else {
+            loadOrders();
+        }
+    }
 
     const viewDetail = (e) => {
         navigate('/orderdetail', {state:{orderId: e.target.value}});
@@ -31,13 +50,18 @@ export const Orders = () =>{
             <h1> Order Management</h1>
             <div>
                 Search by Status: 
-                <select>
+                <select 
+                    type="text"
+                    name="status"
+                    value={status}
+                    onChange={e=>setStatus(e.target.value)} 
+                >
                     <option>All</option>
                     <option>PLACED</option>
                     <option>SHIPPED</option>
                     <option>DELIVERED</option>
                 </select>
-                <button>Search</button>
+                <button onClick={searchStatus}>Search</button>
             </div>
             <br/>
             <table border={1}>
