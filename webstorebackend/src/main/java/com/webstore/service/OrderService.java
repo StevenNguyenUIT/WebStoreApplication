@@ -19,9 +19,12 @@ public class OrderService {
     OrderRepository repo;
 
     public OrderDTO createOrder(OrderDTO orderDTO) {
-        String generatedString = RandomStringUtils.randomAlphabetic(10);
-        orderDTO.setOrderId(generatedString);
-        orderDTO.setStatus("PLACED");
+        //check if orderDTO has orderId or not
+        if (orderDTO.getOrderId() == null || orderDTO.getOrderId().equals("")) {
+            String generatedString = RandomStringUtils.randomAlphabetic(10);
+            orderDTO.setOrderId(generatedString);
+        }
+        orderDTO.setStatus("PLACED");//fixed status when create
         orderDTO.setDate(new Date());
         repo.save(OrderAdapter.toObj(orderDTO));
         return orderDTO;
