@@ -30,22 +30,17 @@ export const ShoppingCart = () => {
     }
 
     const searchProduct = (e) =>{
-      const isExistsProduct = productList.filter(e=>e.name===productFilter);
-      console.log(productFilter);
-      console.log(isExistsProduct);
-      if(isExistsProduct.length !=0){
           client.get("/search?name=" + productFilter)
           .then((response)=>{
               //map data to array 
               let array = new Array(response.data);
-              // console.log(array);
-              setProductList(array);
+              console.log(array[0].products);
+              setProductList(array[0].products);
               setSearchMessage("");
+              if(array[0].products.length===0){
+                setSearchMessage(<a style={{color:"red"}}>No Result</a>);
+              }
           })
-      } else {
-          setSearchMessage(<a style={{color:"red"}}>This Product Number is incorrect, show all</a>);
-          loadProducts();
-      }
     }
     
     const addToCart = (e) =>{
