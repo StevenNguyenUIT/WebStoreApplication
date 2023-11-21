@@ -15,7 +15,8 @@ export const ProductDetail = () => {
         name: initProduct[0].name, 
         price: initProduct[0].price, 
         description: initProduct[0].description, 
-        numberInStock: initProduct[0].numberInStock
+        numberInStock: initProduct[0].numberInStock,
+        reviewList: initProduct[0].reviewList
     });
     const [currentProduct, setCurrentProduct] = useState(initialProduct);
 
@@ -149,6 +150,22 @@ export const ProductDetail = () => {
                 </table>
                 <br/>
                 <button type="submit">Update</button>
+                <hr/>
+                <table >
+                    <thead><h3>Review List</h3></thead>
+                    <tbody>
+                        {initialProduct.reviewList.map((review)=>(
+                            <tr key={review.id}>
+                                <td>Id: {review.id} <br/> 
+                                &nbsp;&nbsp;&nbsp;&nbsp;username: {review.username} <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;message: {review.message} <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;review: {review.rate} <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;date: {review.date} <br/> <br/>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </form>
         </div>
     );
