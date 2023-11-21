@@ -1,8 +1,9 @@
 import React from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {Main} from './Main';
 
-export const Cart = () => {
+export const Cart = ({title}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const itemQuantity = useSelector(state=>state.itemQuantity);
@@ -29,7 +30,7 @@ export const Cart = () => {
       }
     let cartpage = (
         <div>
-            <h1>This is CartPage</h1>
+            <Main title={title}/>
             <h2>cart:(itemQuantity:{itemQuantity} , totalAmount: {totalAmount} )&nbsp;</h2>
             <table border={1}>
               <tbody>

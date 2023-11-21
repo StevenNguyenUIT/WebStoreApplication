@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import axios from "axios";
+import { Main } from "./Main";
 
-export const ShoppingCart = () => {
+export const ShoppingCart = ({title}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const itemQuantity = useSelector(state=>state.itemQuantity);
@@ -66,10 +67,10 @@ export const ShoppingCart = () => {
 
     let shoppingcart = (
         <div>
-            <h1>This is Shopping Cart page</h1>
-            <h2>cart:(itemQuantity:{itemQuantity} , totalAmount: {totalAmount} )&nbsp;
+            <Main title={title}/>
+            <h3>cart: (itemQuantity:{itemQuantity} , totalAmount: {totalAmount} )&nbsp;
             <button onClick={goToCartInfo}>GoToCartInfo</button>
-            </h2>
+            </h3>
             <hr/>
             <div>
                 ProductName

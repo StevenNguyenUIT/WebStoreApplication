@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import {useLocation} from 'react-router-dom';
 import axios from "axios";
+import { Main } from "./Main";
 
-export const OrderDetail = () => {
+export const OrderDetail = ({title}) => {
     const location = useLocation();
     const initdata = {
       "orderId": "",
@@ -65,7 +66,7 @@ export const OrderDetail = () => {
     }
     let orderdetail = (
         <div>
-            <h1>This is Order Detail Page</h1>
+            <Main title={title}/>
             <table border={1}>
                 <tbody>
                     <tr>

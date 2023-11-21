@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
+import { Main } from './Main';
 
-export const Products = () => {
+export const Products = ({title}) => {
     const navigate = useNavigate();
     const cleanproduct = {productNumber:"", name:"", price:"",description:"",numberInStock:"",reviewList:[]};
     const [product, setProduct] = useState(cleanproduct);
@@ -93,7 +94,7 @@ export const Products = () => {
 
     let products = (
         <div>
-            <h1>Management of Product</h1>
+            <Main title={title}/>
             <div>
                 Filter by ProductNumber 
                 <input

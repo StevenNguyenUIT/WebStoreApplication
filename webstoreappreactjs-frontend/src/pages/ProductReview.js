@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
+import { Main } from "./Main";
 
-export const ProductReview = () => {
+export const ProductReview = ({title}) => {
     const navigate = useNavigate();
     const location = useLocation();
     const productNumber = location.state.productNumber;
@@ -37,7 +38,7 @@ export const ProductReview = () => {
     }
     return(
         <div>
-            <h1>Make a review for {name} </h1>
+            <Main title={title}/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <table>
                     <tbody>

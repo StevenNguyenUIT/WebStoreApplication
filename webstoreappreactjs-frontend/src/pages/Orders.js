@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { Main } from "./Main";
 
-export const Orders = () =>{
+export const Orders = ({title}) =>{
     const navigate = useNavigate();
     //initial list of order
     const [orderList, setOrderList] = useState([]);
@@ -47,7 +48,7 @@ export const Orders = () =>{
     }
     let Orders = (
         <div>
-            <h1> Order Management</h1>
+            <Main title={title}/>
             <div>
                 Search by Status: 
                 <select 

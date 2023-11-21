@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import {useLocation} from 'react-router-dom';
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
+import { Main } from "./Main";
 
-export const ProductDetail = () => {
+export const ProductDetail = ({title}) => {
     const location = useLocation();
     const currentProductNumber = location.state.productNumber;
     const initProduct = location.state.product;
@@ -65,7 +66,7 @@ export const ProductDetail = () => {
     }
     let productdetail = (
         <div>
-            <h1>Product Detail</h1>
+            <Main title={title}/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <table>
                     <tbody>
@@ -152,8 +153,8 @@ export const ProductDetail = () => {
                 <button type="submit">Update</button>
                 <hr/>
                 <table >
-                    <thead><h3>Review List</h3></thead>
                     <tbody>
+                        <tr><th>Review List</th></tr>
                         {initialProduct.reviewList.map((review)=>(
                             <tr key={review.id}>
                                 <td>Id: {review.id} <br/> 

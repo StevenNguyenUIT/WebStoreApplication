@@ -3,8 +3,9 @@ import {useNavigate, useLocation} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { Main } from "./Main";
 
-export const CheckoutDetails = () => {
+export const CheckoutDetails = ({title}) => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export const CheckoutDetails = () => {
 
     return (
         <div>
-            <h1>This is Details Checkout Page</h1>
+            <Main title={title}/>
             <table border={1}>
                 <tbody>
                     <tr>
