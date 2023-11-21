@@ -66,7 +66,7 @@ export const ProductDetail = () => {
         <div>
             <h1>Product Detail</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <table border={1}>
+                <table>
                     <tbody>
                         <tr>
                             <td>Product Number:</td>

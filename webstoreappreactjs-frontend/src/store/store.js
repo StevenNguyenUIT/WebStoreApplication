@@ -20,6 +20,14 @@ const cartReducer = (state = {itemQuantity: 0, itemLines:[], totalAmount:0}, act
             }
         }
     }
+    if(action.type==='removeitem'){
+        let filterItem = state.itemLines.filter(item=>item.productNumber !== action.item.productNumber);
+        state = {
+            itemQuantity: state.itemQuantity -action.item.quantity,
+            itemLines: filterItem,
+            totalAmount: state.totalAmount - (action.item.price*action.item.quantity)
+        }
+    }
     if(action.type==='removecart'){
         state = {
             itemQuantity: 0,

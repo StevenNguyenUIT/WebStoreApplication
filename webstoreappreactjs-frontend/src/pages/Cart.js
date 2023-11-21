@@ -9,8 +9,24 @@ export const Cart = () => {
     const itemLines = useSelector(state=>state.itemLines);
     const totalAmount = useSelector(state=>state.totalAmount);
     const onCheckout = () => {
-        navigate('/checkout/personalinfo');
+        if(itemLines.length ===0){
+            alert("No item to checkout, navigate to shoppingCart");
+            navigate('/shoppings');
+        } else {
+            navigate('/checkout/personalinfo');
+        }
     }
+    const removeItem = (e) =>{
+        let item = itemLines.filter(item => item.productNumber === e.target.value);
+        let item1 = {
+          productNumber :  item[0].productNumber,
+          name : item[0].name,
+          price : item[0].price,
+          quantity : item[0].quantity
+        };
+        // console.log(item1);
+        dispatch({type: 'removeitem', item: item1});
+      }
     let cartpage = (
         <div>
             <h1>This is CartPage</h1>
@@ -29,6 +45,7 @@ export const Cart = () => {
                       <td>{item.name}</td>
                       <td>{item.quantity}</td>
                       <td>{item.price}</td>
+                      <td><button onClick={removeItem} value={item.productNumber}>Remove</button></td>
                   </tr>
                 ))}
               </tbody>
