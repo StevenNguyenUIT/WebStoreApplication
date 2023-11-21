@@ -1,12 +1,13 @@
 import React from "react";
 import {useNavigate, useLocation} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 export const CheckoutDetails = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
     const personalInfo = location.state.personalInfo;
     const paymentInfo = location.state.paymentInfo;
     const totalAmount = useSelector(state=>state.totalAmount);
@@ -24,6 +25,8 @@ export const CheckoutDetails = () => {
         client.post("http://localhost:8080/api/orders", order)
         .then((response) =>{
             console.log("added order " + response.data );
+            dispatch({type: 'removecart', item: [], totalAmount:0, itemQuantity:0});
+            navigate('/orders');
         });
     }
 

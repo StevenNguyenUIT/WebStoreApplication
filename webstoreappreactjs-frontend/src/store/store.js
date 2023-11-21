@@ -20,6 +20,13 @@ const cartReducer = (state = {itemQuantity: 0, itemLines:[], totalAmount:0}, act
             }
         }
     }
+    if(action.type==='removecart'){
+        state = {
+            itemQuantity: 0,
+            itemLines: [],
+            totalAmount: 0
+        }
+    }
     return state;
 }
 

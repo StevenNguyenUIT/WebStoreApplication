@@ -29,10 +29,12 @@ export const ShoppingCart = () => {
       })
     }
 
-    const searchProduct = () =>{
-      const isExistsProduct = productList.filter(e=>e.productNumber===productFilter);
+    const searchProduct = (e) =>{
+      const isExistsProduct = productList.filter(e=>e.name===productFilter);
+      console.log(productFilter);
+      console.log(isExistsProduct);
       if(isExistsProduct.length !=0){
-          client.get("/" + productFilter)
+          client.get("/search?name=" + productFilter)
           .then((response)=>{
               //map data to array 
               let array = new Array(response.data);
@@ -73,8 +75,12 @@ export const ShoppingCart = () => {
                 ProductName
                 <input
                     type="text"
+                    placeholder="name"
+                    value={productFilter}
+                    onChange={e=>setProductFilter(e.target.value)}
                 />
                 <button onClick={searchProduct}>Search</button>
+                {searchMessage}
             </div>
             <br/>
             <table border={1}>
