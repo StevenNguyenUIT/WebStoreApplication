@@ -1,49 +1,61 @@
 import React, { useState } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
+import axios from "axios";
 
 export const ShoppingCart = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const cart = useSelector(state=>state.cart);
-    const initialProductList = [{
-        "_id": "P1234568",
-        "name": "Honeycrisp Apple",
-        "price": 1.3,
-        "description": "Fresh Honeycrisp Apple per Each",
-        "numberInStock": 10,
-        "reviewList": [],
-        "_class": "com.webstore.domain.Product"
-      },
-      {
-        "_id": "P1234567",
-        "name": "Red Grapes",
-        "price": 5,
-        "description": "Fresh Red Seedless Grapes, Bag 2.25 lbs per Bag",
-        "numberInStock": 20,
-        "reviewList": [
-          {
-            "_id": "osvwIZSLRv",
-            "username": "customer103",
-            "rate": "4 - GOOD",
-            "date": {
-              "$date": "2023-11-17T17:05:26.000Z"
-            }
-          },
-          {
-            "_id": "uJNENMHzHw",
-            "username": "customer104",
-            "rate": "5 - EXCELLENT",
-            "date": {
-              "$date": "2023-11-17T17:10:19.514Z"
-            }
-          }
-        ],
-        "_class": "com.webstore.domain.Product"
-      }];
-    const [productList, setProductList] = useState(initialProductList);
-    const incrementHandler = () =>{
-        dispatch({type: 'increment'});
+    const itemQuantity = useSelector(state=>state.itemQuantity);
+    const itemLines = useSelector(state=>state.itemLines);
+    const totalAmount = useSelector(state=>state.totalAmount);
+    const [productFilter, setProductFilter] = useState('');
+    const [productList, setProductList] = useState([]);
+    const [searchMessage, setSearchMessage] = useState('');
+    React.useEffect(()=>{
+      loadProducts();
+    }, []);
+    
+    const client = axios.create({
+      baseURL: "http://localhost:8080/api/products"
+    })
+
+    const loadProducts = () => {
+      const products = client.get()
+      .then((response) => {
+          // console.log(response.data.products);
+          // setProductList
+          setProductList(response.data.products);
+      })
+    }
+
+    const searchProduct = () =>{
+      const isExistsProduct = productList.filter(e=>e.productNumber===productFilter);
+      if(isExistsProduct.length !=0){
+          client.get("/" + productFilter)
+          .then((response)=>{
+              //map data to array 
+              let array = new Array(response.data);
+              // console.log(array);
+              setProductList(array);
+              setSearchMessage("");
+          })
+      } else {
+          setSearchMessage(<a style={{color:"red"}}>This Product Number is incorrect, show all</a>);
+          loadProducts();
+      }
+    }
+    
+    const addToCart = (e) =>{
+      let item = productList.filter(item => item.productNumber === e.target.value);
+      let item1 = {
+        productNumber :  item[0].productNumber,
+        name : item[0].name,
+        price : item[0].price,
+        quantity : 1
+      };
+      console.log(item1);
+      dispatch({type: 'addcart', item: item1});
     }
 
     const goToCartInfo = () => {
@@ -53,38 +65,39 @@ export const ShoppingCart = () => {
     let shoppingcart = (
         <div>
             <h1>This is Shopping Cart page</h1>
-            <h2>cart : {cart}</h2>
+            <h2>cart:(itemQuantity:{itemQuantity} , totalAmount: {totalAmount} )&nbsp;
+            <button onClick={goToCartInfo}>GoToCartInfo</button>
+            </h2>
+            <hr/>
             <div>
                 ProductName
                 <input
                     type="text"
                 />
-                <button>Search</button>
+                <button onClick={searchProduct}>Search</button>
             </div>
             <br/>
             <table border={1}>
                 <tbody>
                     <tr>
-                        <th>_id</th>
+                        <th>ProductNumber</th>
                         <th>name</th>
                         <th>price</th>
                         <th>description</th>
                         <th>numberInStock</th>
                     </tr>
                     {productList.map(product=>(
-                        <tr key={product._id}>
-                            <td>{product._id}</td>
+                        <tr key={product.productNumber}>
+                            <td>{product.productNumber}</td>
                             <td>{product.name}</td>
                             <td>{product.price}</td>
                             <td>{product.description}</td>
                             <td>{product.numberInStock}</td>
-                            <td><button onClick={incrementHandler} value={product._id}>AddToCart</button></td>
+                            <td><button onClick={addToCart} value={product.productNumber}>AddToCart</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <br/>
-            <button onClick={goToCartInfo}>GoToCartInfo</button>
         </div>
     );
     return shoppingcart;

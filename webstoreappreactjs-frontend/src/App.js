@@ -1,6 +1,7 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {Products, ProductDetail, Orders, ShoppingCart, Cart, Main, OrderDetail} from './pages'
+import {Products, ProductDetail, Orders, ShoppingCart, Cart, 
+  Main, OrderDetail, CheckoutPersonalInfo, CheckoutPayment, CheckoutDetails} from './pages'
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Route path='/orderdetail' element={<OrderDetail/>}/>
           <Route path='/shoppings' element={<ShoppingCart/>}/>
           <Route path='/cart' element={<Cart/>}/>
+          <Route path='/checkout/personalinfo' element={<CheckoutPersonalInfo/>}/>
+          <Route path='/checkout/payment' element={<CheckoutPayment/>}/>
+          <Route path='/checkout/details' element={<CheckoutDetails/>}/>
         </Routes>
       </BrowserRouter>
     </div>
