@@ -39,6 +39,7 @@ export const ProductReview = ({title}) => {
     return(
         <div>
             <Main title={title}/>
+            <h3>Make a review for {name} Product</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <table>
                     <tbody>

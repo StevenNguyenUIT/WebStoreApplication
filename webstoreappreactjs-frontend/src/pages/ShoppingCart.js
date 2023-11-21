@@ -46,14 +46,19 @@ export const ShoppingCart = ({title}) => {
     
     const addToCart = (e) =>{
       let item = productList.filter(item => item.productNumber === e.target.value);
-      let item1 = {
-        productNumber :  item[0].productNumber,
-        name : item[0].name,
-        price : item[0].price,
-        quantity : 1
-      };
-      console.log(item1);
-      dispatch({type: 'addcart', item: item1});
+      console.log(item);
+      if(item[0].numberInStock!==0){
+        let item1 = {
+          productNumber :  item[0].productNumber,
+          name : item[0].name,
+          price : item[0].price,
+          quantity : 1
+        };
+        console.log(item1);
+        dispatch({type: 'addcart', item: item1});
+      } else {
+        alert('Can not add to cart Due to No stock');
+      }
     }
 
     const makeReview = (e) => {
