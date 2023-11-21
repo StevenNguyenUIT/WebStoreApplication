@@ -10,3 +10,4 @@ export {Cart} from './Cart';
 export {CheckoutPersonalInfo} from './CheckoutPersonalInfo';
 export {CheckoutPayment} from './CheckoutPayment';
 export {CheckoutDetails} from './CheckoutDetails';
+export {ProductReview} from './ProductReview';

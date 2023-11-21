@@ -20,7 +20,18 @@ export const ProductDetail = () => {
     const [currentProduct, setCurrentProduct] = useState(initialProduct);
 
     //validate react-hook-form
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const {register, handleSubmit, formState: {errors}} = useForm(
+        {
+            defaultValues: {
+                productNumber: 'P1234532',
+                name: initProduct[0].name,
+                price: initProduct[0].price,
+                productNumber: initProduct[0].productNumber,
+                numberInStock: initProduct[0].numberInStock,
+                description: initProduct[0].description
+            }
+        }
+    );
 
     React.useEffect(()=>{
         loadProduct();
@@ -38,6 +49,7 @@ export const ProductDetail = () => {
     //update product detail from backend
     const handleFieldChange = (e) => {
         setCurrentProduct({...currentProduct,[e.target.name]:e.target.value});
+
     }
 
     //update function
@@ -57,23 +69,15 @@ export const ProductDetail = () => {
                 <table border={1}>
                     <tbody>
                         <tr>
-                            <td>Type</td>
-                            <td>Current Value</td>
-                            <td>Update Value</td>
-                            <td>Information</td>
-                        </tr>
-                        <tr>
                             <td>Product Number:</td>
                             <td>{initialProduct.productNumber}</td>
-                            <td>{currentProduct.productNumber}</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Product Name:</td>
-                            <td>{initialProduct.name}</td>
                             <td><input
                                 type="text"
-                                // value={currentProduct.name}
+                                // value={initialProduct.name}
                                 name="name"
                                 onChange={handleFieldChange}
                                 {...register("name",{
@@ -85,10 +89,9 @@ export const ProductDetail = () => {
                         </tr>
                         <tr>
                             <td>Price:</td>
-                            <td>{initialProduct.price}</td>
                             <td><input
                                 type="text"
-                                // value={currentProduct.price}
+                                // value={initialProduct.price}
                                 name="price"
                                 onChange={handleFieldChange}
                                 {...register("price",{
@@ -108,10 +111,9 @@ export const ProductDetail = () => {
                         </tr>
                         <tr>
                             <td>Description:</td>
-                            <td>{initialProduct.description}</td>
                             <td><input
                                 type="text"
-                                // value={currentProduct.description}
+                                // value={initialProduct.description}
                                 name="description"
                                 onChange={handleFieldChange}
                                 {...register("description",{
@@ -123,10 +125,9 @@ export const ProductDetail = () => {
                         </tr>
                         <tr>
                             <td>Number In Stock:</td>
-                            <td>{initialProduct.numberInStock}</td>
                             <td><input
                                 type="text"
-                                // value={currentProduct.numberInStock}
+                                // value={initialProduct.numberInStock}
                                 name="numberInStock"
                                 onChange={handleFieldChange}
                                 {...register("numberInStock",{
@@ -144,14 +145,10 @@ export const ProductDetail = () => {
                             </td>
                         <td>{errors.numberInStock && (<p style={{color: "red"}}>{errors.numberInStock.message}</p>)}</td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td><button type="submit">Update</button></td>
-                            <td></td>
-                        </tr>
                     </tbody>
                 </table>
+                <br/>
+                <button type="submit">Update</button>
             </form>
         </div>
     );

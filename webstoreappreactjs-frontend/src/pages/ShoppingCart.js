@@ -55,6 +55,11 @@ export const ShoppingCart = () => {
       dispatch({type: 'addcart', item: item1});
     }
 
+    const makeReview = (e) => {
+      console.log(e.target.value);
+      navigate("/productreview", {state:{productNumber: e.target.value, name: e.target.name}});
+    }
+
     const goToCartInfo = () => {
       navigate("/cart");
     }
@@ -95,6 +100,7 @@ export const ShoppingCart = () => {
                             <td>{product.description}</td>
                             <td>{product.numberInStock}</td>
                             <td><button onClick={addToCart} value={product.productNumber}>AddToCart</button></td>
+                            <td><button onClick={makeReview} value={product.productNumber} name={product.name}>MakeReiew</button></td>
                         </tr>
                     ))}
                 </tbody>

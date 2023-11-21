@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {Products, ProductDetail, Orders, ShoppingCart, Cart, 
-  Main, OrderDetail, CheckoutPersonalInfo, CheckoutPayment, CheckoutDetails} from './pages'
+  Main, OrderDetail, CheckoutPersonalInfo, CheckoutPayment, CheckoutDetails, ProductReview} from './pages'
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
           <Route exact path='/' element={<Main/>}/>
           <Route path='/products' element={<Products/>}/>
           <Route path='/productdetail' element={<ProductDetail/>}/>
+          <Route path='/productreview' element={<ProductReview/>}/>
           <Route path='/orders' element={<Orders/>}/>
           <Route path='/orderdetail' element={<OrderDetail/>}/>
           <Route path='/shoppings' element={<ShoppingCart/>}/>
