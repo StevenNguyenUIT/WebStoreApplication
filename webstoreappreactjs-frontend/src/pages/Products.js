@@ -11,6 +11,7 @@ export const Products = ({title}) => {
     const [productFilter, setProductFilter] = useState('');
     const [productList, setProductList] = useState([]);
     const [searchMessage, setSearchMessage] = useState('');
+    const [msg, setMsg] = useState('');
 
     //validate react-hook-form
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -47,20 +48,23 @@ export const Products = ({title}) => {
         }
     }
 
-    const addProduct = (product) => {
-        client.post("http://localhost:8080/api/products", product)
-        .then((response) =>{
-            console.log("added product " + response.data.productNumber );
-            loadProducts();
-        });
-    }
+    // const addProduct = (product) => {
+    //     client.post("http://localhost:8080/api/products", product)
+    //     .then((response) =>{
+    //         console.log("added product " + response.data.productNumber );
+    //         setMsg("Added successfully!");
+    //         loadProducts();
+    //     });
+    // }
 
     const removeProduct = (e) => {
         console.log(e.target.value);
         client.delete("/" + e.target.value)
         .then((response)=>{
-            console.log("removed product " + response.headers)
+            console.log("removed product " + response.headers);
+            setMsg("Removed successfully!");
             loadProducts();
+            setProduct(cleanproduct);
         });
     }
 
@@ -73,10 +77,17 @@ export const Products = ({title}) => {
             //used when call ApI
             console.log("call the server");
             console.log(product);
-            addProduct(product);
+            //addProduct(product);
+            client.post("http://localhost:8080/api/products", product)
+            .then((response) =>{
+            console.log("added product " + response.data.productNumber );
+            setMsg("Added successfully!");
+            loadProducts();
+            setProduct(cleanproduct);
+            
+        });
         }
-        //clear product
-        setProduct(cleanproduct);
+        
 
     }
 
@@ -98,12 +109,12 @@ export const Products = ({title}) => {
             <div>
                 Filter by ProductNumber 
                 <input
-                    type='text'
+                    type='text' id="searchTextID"
                     placeholder='ex: P1234567'
                     value={productFilter}
                     onChange={e=>setProductFilter(e.target.value)}
                 />
-                <button onClick={searchProduct}>Search</button>
+                <button id="searchBtnID" onClick={searchProduct}>Search</button>
                 {searchMessage}
             </div>
             
@@ -112,17 +123,19 @@ export const Products = ({title}) => {
                 <table border={1}>
                     <tbody>
                         <tr><th>Product Number</th><th>Name</th><th>Price</th><th>Description</th><th>numberInStock</th></tr>
-                    {productList.map(product => (
-                        <tr key={product.productNumber}>
+                    {productList.map(product => {
+                        let removeId = product.productNumber + "_removeID";
+                        let detailId = product.productNumber + "_detailID";
+                        return (<tr key={product.productNumber}>
                             <td>{product.productNumber}</td>
                             <td>{product.name}</td>
                             <td>{product.price}</td>
                             <td>{product.description}</td>
                             <td>{product.numberInStock}</td>
-                            <td><button onClick={removeProduct} value={product.productNumber}>Remove</button></td>
-                            <td><button onClick={handleViewDetail} value={product.productNumber}>View Detail</button></td>
+                            <td><button id={removeId} onClick={removeProduct} value={product.productNumber}>Remove</button></td>
+                            <td><button id={detailId} onClick={handleViewDetail} value={product.productNumber}>View Detail</button></td>
                         </tr>
-                    ))}
+                    )})}
                     </tbody>
                 </table>
 
@@ -175,7 +188,7 @@ export const Products = ({title}) => {
                                     {...register("price",{
                                         required: "price is required.",
                                         pattern:{
-                                            value: /^[0-9]{1,}$/,
+                                            value: /^[0-9]+([,\.][0-9]+)?$/,
                                             message: "please input number"
                                         },
                                         min:{
@@ -192,6 +205,7 @@ export const Products = ({title}) => {
                                 <td><input
                                     type='text'
                                     placeholder='description'
+                                    id="descriptionID"
                                     name='description'
                                     // value={product.description}
                                     onChange={handleFieldChange}
@@ -227,11 +241,12 @@ export const Products = ({title}) => {
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><button type='submit'>Add Product</button></td>
+                                <td><button id="addBtnID" type='submit'>Add Product</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
+                <h4 id="messageID">{msg}</h4>
             </div>
         </div>
     );
