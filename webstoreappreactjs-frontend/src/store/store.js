@@ -12,7 +12,7 @@ const cartReducer = (state = {itemQuantity: 0, itemLines:[], totalAmount:0}, act
                 state = {
                     itemQuantity: state.itemQuantity + 1,
                     itemLines: filterItem.concat(newItem),
-                    totalAmount: state.totalAmount + action.item.price
+                    totalAmount: (10*state.totalAmount + action.item.price*10)/10
                 }
             } else {
                 alert('Can not add to cart Due to No stock');
@@ -21,7 +21,7 @@ const cartReducer = (state = {itemQuantity: 0, itemLines:[], totalAmount:0}, act
             state = {
                 itemQuantity: state.itemQuantity + 1,
                 itemLines: state.itemLines.concat(action.item),
-                totalAmount: state.totalAmount + action.item.price
+                totalAmount: (10*state.totalAmount + action.item.price*10)/10
             }
         }
     }
