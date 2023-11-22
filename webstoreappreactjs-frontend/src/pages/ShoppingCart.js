@@ -46,7 +46,7 @@ export const ShoppingCart = ({title}) => {
     
     const addToCart = (e) =>{
       let item = productList.filter(item => item.productNumber === e.target.value);
-      console.log(item);
+      // console.log(item);
       if(item[0].numberInStock!==0){
         let item1 = {
           productNumber :  item[0].productNumber,
@@ -54,8 +54,9 @@ export const ShoppingCart = ({title}) => {
           price : item[0].price,
           quantity : 1
         };
-        console.log(item1);
-        dispatch({type: 'addcart', item: item1});
+        // console.log(item1);
+        let stock = item[0].numberInStock;
+        dispatch({type: 'addcart', item: item1, stock: stock});
       } else {
         alert('Can not add to cart Due to No stock');
       }
@@ -105,7 +106,7 @@ export const ShoppingCart = ({title}) => {
                             <td>{product.price}</td>
                             <td>{product.description}</td>
                             <td>{product.numberInStock}</td>
-                            <td><button onClick={addToCart} value={product.productNumber}>AddToCart</button></td>
+                            <td><button onClick={addToCart} value={product.productNumber} >AddToCart</button></td>
                             <td><button onClick={makeReview} value={product.productNumber} name={product.name}>MakeReiew</button></td>
                         </tr>
                     ))}

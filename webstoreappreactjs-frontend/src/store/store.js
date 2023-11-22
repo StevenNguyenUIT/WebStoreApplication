@@ -5,12 +5,17 @@ const cartReducer = (state = {itemQuantity: 0, itemLines:[], totalAmount:0}, act
         let existItem = state.itemLines.filter(item=>item.productNumber === action.item.productNumber);
         let filterItem = state.itemLines.filter(item=>item.productNumber !== action.item.productNumber);
         if(existItem.length!==0){
-            let newItem = {productNumber:existItem[0].productNumber,
-                name:existItem[0].name,price: existItem[0].price, quantity: existItem[0].quantity + 1};
-            state = {
-                itemQuantity: state.itemQuantity + 1,
-                itemLines: filterItem.concat(newItem),
-                totalAmount: state.totalAmount + action.item.price
+            //check numberInstock and current value in cart
+            if(existItem[0].quantity < action.stock){
+                let newItem = {productNumber:existItem[0].productNumber,
+                    name:existItem[0].name,price: existItem[0].price, quantity: existItem[0].quantity + 1};
+                state = {
+                    itemQuantity: state.itemQuantity + 1,
+                    itemLines: filterItem.concat(newItem),
+                    totalAmount: state.totalAmount + action.item.price
+                }
+            } else {
+                alert('Can not add to cart Due to No stock');
             }
         } else {
             state = {
