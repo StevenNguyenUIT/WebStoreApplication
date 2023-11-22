@@ -75,7 +75,7 @@ export const OrderDetail = ({title}) => {
                     </tr>
                     <tr>
                         <td>Status</td>
-                        <td>{order.status}</td>
+                        <td id="statusTextID">{order.status}</td>
                     </tr>
                     <tr>
                         <td>Date: </td>
