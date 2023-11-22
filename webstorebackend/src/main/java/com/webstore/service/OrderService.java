@@ -78,4 +78,8 @@ public class OrderService {
         }
         return dtoList;
     }
+
+    public void removeOrder(String orderId) {
+        repo.deleteById(orderId);
+    }
 }

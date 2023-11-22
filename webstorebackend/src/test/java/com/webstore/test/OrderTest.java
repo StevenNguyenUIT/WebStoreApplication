@@ -126,5 +126,23 @@ public class OrderTest {
                 .body("orderList.personalInfo.name",hasItem("Mike"));
     }
 
+    @Test
+    @Order(8)
+    public void testDeleteOrder_111() {
+        // delete
+        RestAssured.given().when().delete("/api/orders/ORDER_111")
+                .then()
+                .log().body().statusCode(204);
+    }
+    @Test
+    @Order(9)
+    public void testDeleteOrder_222() {
+        // delete
+        RestAssured.given().when().delete("/api/orders/ORDER_222")
+                .then()
+                .log().body().statusCode(204);
+    }
+
+
 
 }

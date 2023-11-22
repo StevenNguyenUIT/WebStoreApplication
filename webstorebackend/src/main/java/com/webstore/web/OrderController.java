@@ -46,4 +46,9 @@ public class OrderController {
         OrdersInfo info = new OrdersInfo(data);
         return new ResponseEntity<>(info, HttpStatus.OK);
     }
+    @DeleteMapping("/api/orders/{orderId}")
+    public ResponseEntity<?> deleteOrder(@PathVariable("orderId") String orderId) {
+        service.removeOrder(orderId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);//204
+    }
 }
