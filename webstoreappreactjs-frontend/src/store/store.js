@@ -30,7 +30,7 @@ const cartReducer = (state = {itemQuantity: 0, itemLines:[], totalAmount:0}, act
         state = {
             itemQuantity: state.itemQuantity -action.item.quantity,
             itemLines: filterItem,
-            totalAmount: state.totalAmount - (action.item.price*action.item.quantity)
+            totalAmount: (10*state.totalAmount - (action.item.price*action.item.quantity)*10)/10
         }
     }
     if(action.type==='removecart'){
