@@ -74,8 +74,8 @@ export const ShoppingCart = ({title}) => {
     let shoppingcart = (
         <div>
             <Main title={title}/>
-            <h3>cart: (itemQuantity: {itemQuantity} , totalAmount: {totalAmount} $)&nbsp;
-            <button onClick={goToCartInfo}>GoToCartInfo</button>
+            <h3>cart: (itemQuantity: <a id="itemQuantityShoppingID">{itemQuantity}</a> , totalAmount: <a id="totalAmountShoppingID">{totalAmount}</a> $)&nbsp;
+            <button id="goToCartShoppingID" onClick={goToCartInfo}>GoToCartInfo</button>
             </h3>
             <hr/>
             <div>
@@ -83,10 +83,11 @@ export const ShoppingCart = ({title}) => {
                 <input
                     type="text"
                     placeholder="name"
+                    id="inputProductNameID"
                     value={productFilter}
                     onChange={e=>setProductFilter(e.target.value)}
                 />
-                <button onClick={searchProduct}>Search</button>
+                <button id="searchShoppingBtnID" onClick={searchProduct}>Search</button>
                 {searchMessage}
             </div>
             <br/>
@@ -99,17 +100,21 @@ export const ShoppingCart = ({title}) => {
                         <th>description</th>
                         <th>numberInStock</th>
                     </tr>
-                    {productList.map(product=>(
+                    {productList.map(product=>{
+                      let addId = product.productNumber + "_addID";
+                      let makeReviewId = product.productNumber + "_makeReviewID";
+                      let numberInStockId = product.productNumber + "_numberInStockID";
+                      return (
                         <tr key={product.productNumber}>
                             <td>{product.productNumber}</td>
                             <td>{product.name}</td>
                             <td>{product.price}</td>
                             <td>{product.description}</td>
-                            <td>{product.numberInStock}</td>
-                            <td><button onClick={addToCart} value={product.productNumber} >AddToCart</button></td>
-                            <td><button onClick={makeReview} value={product.productNumber} name={product.name}>MakeReiew</button></td>
+                            <td id={numberInStockId}>{product.numberInStock}</td>
+                            <td><button id={addId} onClick={addToCart} value={product.productNumber} >AddToCart</button></td>
+                            <td><button id={makeReviewId} onClick={makeReview} value={product.productNumber} name={product.name}>MakeReiew</button></td>
                         </tr>
-                    ))}
+                    )})}
                 </tbody>
             </table>
         </div>
