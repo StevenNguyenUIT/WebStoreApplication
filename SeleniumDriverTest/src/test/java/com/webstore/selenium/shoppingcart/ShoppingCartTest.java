@@ -34,7 +34,7 @@ public class ShoppingCartTest {
         System.setProperty("webdriver.chrome.driver", "/Users/xhuyen/3_WAA/chromedive/chromedriver-mac-arm64/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.setBinary("/Users/xhuyen/3_WAA/chromedive/chrome-headless-shell-mac-arm64/chrome-headless-shell");
-        
+
         // use for Windows
         // System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver-win64\\chromedriver.exe");
         // options.setBinary("C:\\tmp\\chrome-headless-shell-win64\\chrome-headless-shell.exe");
@@ -65,15 +65,50 @@ public class ShoppingCartTest {
         //First goto Product Page then create a product
         productManagementPage = page1.gotoProductManagementPage();//to create product first
         //productManagementPage.waitAndGetResultByName("productNumber");
-        productManagementPage.enterData2("P1234567xx1", "Green Banana", "3.5", "Fresh Green Banana 2pounds", "100");
+        productManagementPage.enterData("P1234567xx1", "Green Banana", "3.5", "Fresh Green Banana 2pounds", "100");
         productManagementPage.clickButtonAdd2();
         productManagementPage.waitAndGetResultAfterThen("messageID");
         //Back to Shopping Page to verify the given product has been created
         page1 = productManagementPage.gotoShoppingPage();
         String inStock = page1.waitAndGetResultAfterThen("P1234567xx1_numberInStockID");
         assertThat(inStock, is("100"));
+        //click AddToCart button
+        page1.clickById("P1234567xx1_addID");
+        String quantity = page1.waitAndGetResultAfterThen("itemQuantityShoppingID");
+        assertThat(quantity, is("1"));
+        //click AddToCart button, more time
+        page1.clickById("P1234567xx1_addID");
+        quantity = page1.waitAndGetResultAfterThen("itemQuantityShoppingID");
+        assertThat(quantity, is("2"));
     }
 
+
+    //@Test
+    public void testC_MakeAReview() {
+        //First goto Product Page then create a NEW PRODUCT
+        productManagementPage = page1.gotoProductManagementPage();//to create product first
+        //productManagementPage.waitAndGetResultByName("productNumber");
+        productManagementPage.enterData2("P1234567xx2", "Green Banana", "3.5", "Fresh Green Banana 2pounds", "100");
+        productManagementPage.clickButtonAdd2();
+        productManagementPage.waitAndGetResultAfterThen("messageID");
+        //Back to Shopping Page to verify the given product has been created
+        page1 = productManagementPage.gotoShoppingPage();
+        String inStock = page1.waitAndGetResultAfterThen("P1234567xx2_numberInStockID");
+        assertThat(inStock, is("100"));
+        //click MakeReview button
+        page2 = page1.clickMakeReviewThenGotoMakeReviewPage("P1234567xx2_makeReviewID");
+        page2.waitAndGetResultByTagName("h3");
+        //enter input data
+        page2.enterData("user101", "This product is good", "4 - GOOD");
+        page2.clickBtnAddReview();
+
+        String quantity = page1.waitAndGetResultAfterThen("itemQuantityShoppingID");
+        assertThat(quantity, is("1"));
+        //click AddToCart button, more time
+        page1.clickById("P1234567xx1_addID");
+        quantity = page1.waitAndGetResultAfterThen("itemQuantityShoppingID");
+        assertThat(quantity, is("2"));
+    }
     @After
     public void tearDown() {
         page1.quit();

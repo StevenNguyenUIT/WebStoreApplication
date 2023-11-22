@@ -101,7 +101,7 @@ export const ProductReview = ({title}) => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td><button type='submit'>Add Review</button></td>
+                            <td><button id="addReviewBtnID" type='submit'>Add Review</button></td>
                         </tr>
                     </tbody>
                 </table>

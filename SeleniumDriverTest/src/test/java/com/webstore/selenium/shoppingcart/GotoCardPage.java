@@ -19,9 +19,22 @@ public class GotoCardPage {
         this.driver.quit();
     }
 
-
-    public String waitAndGetResultAfterThen(String componentId) {
+    public String waitAndGetResultById(String componentId) {
         By textLocator = By.id(componentId);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+        element.click();
+        return element.getText();
+    }
+    public String waitAndGetResultByName(String componentName) {
+        By textLocator = By.name(componentName);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+        element.click();
+        return element.getText();
+    }
+    public String waitAndGetResultByTagName(String componentName) {
+        By textLocator = By.tagName(componentName);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
         element.click();
