@@ -95,7 +95,7 @@ export const CheckoutPayment = ({title}) => {
                                 })}
                             />
                             </td>
-                        <td>{errors.validDate && (<p style={{color: "red"}}>{errors.validDate.message}</p>)}</td>
+                        <td>{errors.validationCode && (<p style={{color: "red"}}>{errors.validationCode.message}</p>)}</td>
                         </tr>
                         <tr>
                             <td></td>
