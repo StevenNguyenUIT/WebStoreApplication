@@ -39,24 +39,38 @@ public class ProductManagementTest {
     public void testAdd_Remove_Product_P1234567890() {
         page1.enterData("P1234567890", "Green Banana", "3.5", "Fresh Green Banana 2pounds", "10");
         page1.clickButtonAdd();
-        String actual = page1.waitAndGetResultAfterAdded();
+        String actual = page1.waitAndGetResultAfterThen("messageID");
         assertThat(actual, is("Added successfully!"));
         //CLICK REMOVE
         page1.clickById("P1234567890_removeID");
-         actual = page1.waitAndGetResultAfterAdded();
+         actual = page1.waitAndGetResultAfterThen("messageID");
         assertThat(actual, is("Removed successfully!"));
     }
 
   @Test
-   public void test_Detail_Product_P1234567899() {
+   public void test_Detail_Update_Product_P1234567899() {
       page1.enterData("P1234567899", "Green Banana", "3.5", "Fresh Green Banana 2pounds", "10");
       page1.clickButtonAdd();
-      String actual = page1.waitAndGetResultAfterAdded();
+      String actual = page1.waitAndGetResultAfterThen("messageID");
       assertThat(actual, is("Added successfully!"));
-      //CLICK REMOVE
+      //CLICK Detail button
       page2 = page1.clickDetailButtonById("P1234567899_detailID");
+      // move to next page then verify data
       actual = page2.getProductNumberDisplay();
       assertThat(actual, is("P1234567899"));
+      //click UPDATE button
+      page2.clickUpdateButton();
+      //verify data
+      actual = page2.waitAndGetResultAfterThen("messageID");
+      assertThat(actual, is("Updated successfully!"));
+
+      //Back to Products Page
+      page1 = page2.clickMenuProductManagement();
+      //CLICK REMOVE
+      //page1.clickById("P1234567899_removeID");
+      page1.waitAndGetResultAfterThen("P1234567899_removeID");
+      actual = page1.waitAndGetResultAfterThen("messageID");
+      assertThat(actual, is("Removed successfully!"));
    }
 
     @After

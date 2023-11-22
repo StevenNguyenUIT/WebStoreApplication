@@ -54,8 +54,8 @@ public class ProductManagementPage {
     public void clickButtonAdd() {
         this.addButton.click();
     }
-    public String waitAndGetResultAfterAdded() {
-        By textLocator = By.id("messageID");
+    public String waitAndGetResultAfterThen(String componentId) {
+        By textLocator = By.id(componentId);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
         element.click();
