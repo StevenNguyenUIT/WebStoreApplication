@@ -34,6 +34,11 @@ public class ShoppingCartTest {
         System.setProperty("webdriver.chrome.driver", "/Users/xhuyen/3_WAA/chromedive/chromedriver-mac-arm64/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.setBinary("/Users/xhuyen/3_WAA/chromedive/chrome-headless-shell-mac-arm64/chrome-headless-shell");
+        
+        // use for Windows
+        // System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver-win64\\chromedriver.exe");
+        // options.setBinary("C:\\tmp\\chrome-headless-shell-win64\\chrome-headless-shell.exe");
+
         options.addArguments("--remote-allow-origins=*");
         // create chrome instance
         driver = new ChromeDriver(options);
