@@ -29,6 +29,7 @@ export const CheckoutPersonalInfo = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='name'
+                                id='nameCheckoutID'
                                 name='name'
                                 onChange={handleFieldChange}
                                 {...register("name",{
@@ -47,6 +48,7 @@ export const CheckoutPersonalInfo = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='email'
+                                id='emailCheckoutID'
                                 name='email'
                                 onChange={handleFieldChange}
                                 {...register("email",{
@@ -61,6 +63,7 @@ export const CheckoutPersonalInfo = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='phone'
+                                id='phoneCheckoutID'
                                 name='phone'
                                 onChange={handleFieldChange}
                                 {...register("phone",{
@@ -79,8 +82,8 @@ export const CheckoutPersonalInfo = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='street'
+                                id='streetCheckoutID'
                                 name='street'
-                                // value={product.description}
                                 onChange={handleFieldChange}
                                 {...register("street",{
                                     required: "street is required."
@@ -94,8 +97,8 @@ export const CheckoutPersonalInfo = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='city'
+                                id='cityCheckoutID'
                                 name='city'
-                                // value={product.description}
                                 onChange={handleFieldChange}
                                 {...register("city",{
                                     required: "city is required."
@@ -109,8 +112,8 @@ export const CheckoutPersonalInfo = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='zip'
+                                id='zipCheckoutID'
                                 name='zip'
-                                // value={product.numberInStock}
                                 onChange={handleFieldChange}
                                 {...register("zip",{
                                     required: "zipcode is required.",
@@ -129,7 +132,7 @@ export const CheckoutPersonalInfo = ({title}) => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td><button type='submit'>Next to Payment</button></td>
+                            <td><button id='processPaymentBtnID' type='submit'>Process Payment</button></td>
                         </tr>
                     </tbody>
                 </table>

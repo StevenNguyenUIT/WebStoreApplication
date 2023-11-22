@@ -31,6 +31,7 @@ export const CheckoutPayment = ({title}) => {
                             <td><select
                                     type='text'
                                     placeholder='creditCardType'
+                                    id='creditCardTypeCheckoutID'
                                     name='creditCardType'
                                     onChange={handleFieldChange}
                                     {...register("creditCardType",{
@@ -49,6 +50,7 @@ export const CheckoutPayment = ({title}) => {
                                 type='text'
                                 placeholder='number'
                                 name='number'
+                                id='creditCardNumberCheckoutID'
                                 onChange={handleFieldChange}
                                 {...register("number",{
                                     required: "number is required.",
@@ -70,6 +72,7 @@ export const CheckoutPayment = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='validDate'
+                                id='validDateCheckoutID'
                                 name='validDate'
                                 onChange={handleFieldChange}
                                 {...register("validDate",{
@@ -84,6 +87,7 @@ export const CheckoutPayment = ({title}) => {
                             <td><input
                                 type='text'
                                 placeholder='validationCode'
+                                id='validationCodeCheckoutID'
                                 name='validationCode'
                                 onChange={handleFieldChange}
                                 {...register("validationCode",{
@@ -95,7 +99,7 @@ export const CheckoutPayment = ({title}) => {
                         </tr>
                         <tr>
                             <td></td>
-                            <td><button type='submit'>Next to Details</button></td>
+                            <td><button id='processDetailBtnID' type='submit'>Process Final Details</button></td>
                         </tr>
                     </tbody>
                 </table>
