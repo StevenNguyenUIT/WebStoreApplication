@@ -34,11 +34,12 @@ export const CheckoutDetails = ({title}) => {
     return (
         <div>
             <Main title={title}/>
-            <table border={1}>
+            <table >
                 <tbody>
                     <tr>
-                        <td>totalAmount: </td>
-                        <td>{totalAmount}</td>
+                        <td>TotalAmount: </td>
+                        <td id="totalAmountDetailTxtID">{totalAmount}</td>
+                        <td>$</td>
                     </tr>
                     <tr>
                     </tr>
@@ -51,12 +52,12 @@ export const CheckoutDetails = ({title}) => {
                   <tbody>
                     <tr><td>name</td><td>email</td><td>phone</td><td>street</td><td>city</td><td>zip</td></tr>
                     <tr>
-                      <td>{personalInfo.name}</td>
-                      <td>{personalInfo.email}</td>
-                      <td>{personalInfo.phone}</td>
-                      <td>{personalInfo.street}</td>
-                      <td>{personalInfo.city}</td>
-                      <td>{personalInfo.zip}</td>
+                      <td id="nameDetailTxtID">{personalInfo.name}</td>
+                      <td id="emailDetailTxtID">{personalInfo.email}</td>
+                      <td id="phoneDetailTxtID">{personalInfo.phone}</td>
+                      <td id="streetDetailTxtID">{personalInfo.street}</td>
+                      <td id="cityDetailTxtID">{personalInfo.city}</td>
+                      <td id="zipDetailTxtID">{personalInfo.zip}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -67,10 +68,10 @@ export const CheckoutDetails = ({title}) => {
                   <tbody>
                     <tr><td>creditCardType</td><td>number</td><td>validDate</td><td>validationCode</td></tr>
                     <tr>
-                      <td>{paymentInfo.creditCardType}</td>
-                      <td>{paymentInfo.number}</td>
-                      <td>{paymentInfo.validDate}</td>
-                      <td>{paymentInfo.validationCode}</td>
+                      <td id="creditCardTypeDetailTxtID">{paymentInfo.creditCardType}</td>
+                      <td id="numberDetailTxtID">{paymentInfo.number}</td>
+                      <td id="validDateDetailTxtID">{paymentInfo.validDate}</td>
+                      <td id="validationCodeDetailTxtID">{paymentInfo.validationCode}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -81,19 +82,24 @@ export const CheckoutDetails = ({title}) => {
                 <table border={1}>
                   <tbody>
                     <tr><td>productNumber</td><td>name</td><td>quantity</td><td>price</td></tr>
-                    {orderItemList.map(item=>(
-                      <tr key={item.productNumber}>
-                        <td>{item.productNumber}</td>
-                        <td>{item.name}</td>
-                        <td>{item.quantity}</td>
-                        <td>{item.price}</td>
-                      </tr>
-                    ))}
+                    {orderItemList.map(item=>{
+                      let productNumberId = item.productNumber + "_productNumberDetailID";
+                      let nameId = item.name + "_nameDetailID";
+                      let quantityId = item.quantity + "_quantityDetailID";
+                      let priceId = item.price + "_priceDetailID";
+                      return (
+                        <tr key={item.productNumber}>
+                          <td id={productNumberId}>{item.productNumber}</td>
+                          <td id={nameId}>{item.name}</td>
+                          <td id={quantityId}>{item.quantity}</td>
+                          <td id={priceId}>{item.price}</td>
+                        </tr>
+                    )})}
                   </tbody>
                 </table>
             </div>
             <br/>
-            <button onClick={addOrder}>Confirm Order</button>
+            <button id="confirmOrderID" onClick={addOrder}>Confirm Order</button>
         </div>
     );
 }
