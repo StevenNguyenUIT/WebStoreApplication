@@ -5,6 +5,7 @@ import com.webstore.selenium.product.ProductManagementPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,6 +15,7 @@ public class ShoppingPage {
     WebDriver driver;
     public ShoppingPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
     public void quit() {
         this.driver.quit();
@@ -21,19 +23,19 @@ public class ShoppingPage {
     public void open(String url) {
         this.driver.get(url);
     }
-    public String waitAndGetResultAfterThen(String componentId) {
-        By textLocator = By.id(componentId);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
-        element.click();
-        return element.getText();
-    }
+
     public String waitAndGetResultById(String componentId) {
         By textLocator = By.id(componentId);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
         element.click();
         return element.getText();
+    }
+    public void waitResultById(String componentId) {
+        By textLocator = By.id(componentId);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+
     }
     public String waitAndGetResultByName(String componentName) {
         By textLocator = By.name(componentName);

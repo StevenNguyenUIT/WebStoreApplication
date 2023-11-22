@@ -55,19 +55,19 @@ public class ProductManagementPage {
         this.descriptionField.sendKeys(description);
         this.numberInStockField.sendKeys(num);
     }
-    public void enterData2(String productNumber, String name, String price, String description, String num) {
-        driver.findElement(By.name("productNumber")).sendKeys(productNumber);
-        driver.findElement(By.name("name")).sendKeys(name);
-        driver.findElement(By.name("price")).sendKeys(price);
-        driver.findElement(By.id("descriptionID")).sendKeys(description);
-        driver.findElement(By.name("numberInStock")).sendKeys(num);
-    }
+//    public void enterData2(String productNumber, String name, String price, String description, String num) {
+//        driver.findElement(By.name("productNumber")).sendKeys(productNumber);
+//        driver.findElement(By.name("name")).sendKeys(name);
+//        driver.findElement(By.name("price")).sendKeys(price);
+//        driver.findElement(By.id("descriptionID")).sendKeys(description);
+//        driver.findElement(By.name("numberInStock")).sendKeys(num);
+//    }
     public void clickButtonAdd() {
         this.addButton.click();
     }
-    public void clickButtonAdd2() {
-        driver.findElement(By.id("addBtnID")).click();
-    }
+//    public void clickButtonAdd2() {
+//        driver.findElement(By.id("addBtnID")).click();
+//    }
     public String waitAndGetResultAfterThen(String componentId) {
         By textLocator = By.id(componentId);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -96,9 +96,26 @@ public class ProductManagementPage {
         driver.findElement(By.id(componentId)).click();
         return new ProductDetailPage(this.driver);
     }
+    public ProductDetailPage waitAndClickDetailButtonById(String componentId) {
+        PageFactory.initElements(driver, this);
+        By textLocator = By.id(componentId);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+        element.click();
+        return new ProductDetailPage(this.driver);
+    }
     public ShoppingPage gotoShoppingPage() {
         driver.findElement(By.id("menuShoppingID")).click();
         return new ShoppingPage(driver);
     }
 
+    public void enterSearchData(String value) {
+        WebElement element = driver.findElement(By.id("searchTextID"));
+        element.sendKeys(value);
+    }
+
+    public void clickSearchButton() {
+        WebElement element = driver.findElement(By.id("searchBtnID"));
+        element.click();
+    }
 }

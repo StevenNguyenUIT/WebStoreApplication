@@ -78,7 +78,7 @@ export const ShoppingCart = ({title}) => {
     let shoppingcart = (
         <div>
             <Main title={title}/>
-            <h3>cart: (itemQuantity: <a id="itemQuantityShoppingID">{itemQuantity}</a> , totalAmount: <a id="totalAmountShoppingID">{totalAmount}</a> $)&nbsp;
+            <h3>cart: (itemQuantity: <span id="itemQuantityShoppingID">{itemQuantity}</span> , totalAmount: <a id="totalAmountShoppingID">{totalAmount}</a> $)&nbsp;
             <button id="goToCartShoppingID" onClick={goToCartInfo}>GoToCartInfo</button>
             </h3>
             <hr/>

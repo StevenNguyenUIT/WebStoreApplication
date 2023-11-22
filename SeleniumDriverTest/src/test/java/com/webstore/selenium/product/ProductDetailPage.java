@@ -52,4 +52,10 @@ public class ProductDetailPage {
     public void clickUpdateButton() {
         this.updateBtn.click();
     }
+
+    public String findFirstReviewItemTD() {
+        ////*[@id="tableTwoID"]/tbody/tr/td
+        WebElement element = driver.findElement(By.xpath("//*[@id='tableTwoID']/tbody/tr/td"));
+        return element.getText();
+    }
 }

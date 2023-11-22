@@ -54,6 +54,12 @@ public class MakeReviewPage {
         driver.findElement(By.name("rate")).sendKeys(rate);
     }
 
-    public void clickBtnAddReview() {
+    public ShoppingPage clickBtnAddReview() {
+        By textLocator = By.id("addReviewBtnID");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+        element.click();
+        //addReviewBtn.click();
+        return new ShoppingPage(driver);
     }
 }

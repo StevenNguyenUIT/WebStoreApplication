@@ -71,7 +71,7 @@ export const ProductDetail = ({title}) => {
         <div>
             <Main title={title}/>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <table>
+                <table id="tableOneID">
                     <tbody>
                         <tr>
                             <td>Product Number:</td>
@@ -156,10 +156,11 @@ export const ProductDetail = ({title}) => {
                 <button id="updateBtnID" type="submit">Update</button>
                 <p id="messageID" className="success_msg">{msg}</p>
                 <hr/>
-                <table >
+                <h4>Review List</h4>
+                <table id="tableTwoID">
                     <tbody>
-                        <tr><th>Review List</th></tr>
-                        {initialProduct.reviewList.map((review)=>(
+                        {initialProduct.reviewList.map((review)=>
+                            (
                             <tr key={review.id}>
                                 <td>Id: {review.id} <br/> 
                                 &nbsp;&nbsp;&nbsp;&nbsp;username: {review.username} <br/>

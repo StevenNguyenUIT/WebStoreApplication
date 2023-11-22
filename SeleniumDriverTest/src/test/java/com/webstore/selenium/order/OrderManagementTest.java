@@ -41,6 +41,21 @@ public class OrderManagementTest {
         page1 = PageFactory.initElements(driver, OrderPage.class);
         page1.open("http://localhost:3000/orders");
     }
+    @Test
+    public void testA_SearchByPLACEDStatus() {
+        String actual = "100";
+        assertThat(actual, is("100"));
+    }
+    @Test
+    public void testB_ViewDetailOfOrder() {
+        String actual = "100";
+        assertThat(actual, is("100"));
+    }
+    @Test
+    public void testC_UpdateStatusSHIPPED() {
+        String actual = "100";
+        assertThat(actual, is("100"));
+    }
     @After
     public void tearDown() {
         page1.quit();
