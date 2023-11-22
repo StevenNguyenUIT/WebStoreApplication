@@ -1,5 +1,6 @@
 package com.webstore.selenium.product;
 
+import com.webstore.selenium.shoppingcart.ShoppingPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,11 +52,35 @@ public class ProductManagementPage {
         this.descriptionField.sendKeys(description);
         this.numberInStockField.sendKeys(num);
     }
+    public void enterData2(String productNumber, String name, String price, String description, String num) {
+        driver.findElement(By.name("productNumber")).sendKeys(productNumber);
+        driver.findElement(By.name("name")).sendKeys(name);
+        driver.findElement(By.name("price")).sendKeys(price);
+        driver.findElement(By.id("descriptionID")).sendKeys(description);
+        driver.findElement(By.name("numberInStock")).sendKeys(num);
+    }
     public void clickButtonAdd() {
         this.addButton.click();
     }
+    public void clickButtonAdd2() {
+        driver.findElement(By.id("addBtnID")).click();
+    }
     public String waitAndGetResultAfterThen(String componentId) {
         By textLocator = By.id(componentId);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+        element.click();
+        return element.getText();
+    }
+    public String waitAndGetResultById(String componentId) {
+        By textLocator = By.id(componentId);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+        element.click();
+        return element.getText();
+    }
+    public String waitAndGetResultByName(String componentName) {
+        By textLocator = By.name(componentName);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
         element.click();
@@ -67,6 +92,10 @@ public class ProductManagementPage {
     public ProductDetailPage clickDetailButtonById(String componentId) {
         driver.findElement(By.id(componentId)).click();
         return new ProductDetailPage(this.driver);
+    }
+    public ShoppingPage gotoShoppingPage() {
+        driver.findElement(By.id("menuShoppingID")).click();
+        return new ShoppingPage(driver);
     }
 
 }
