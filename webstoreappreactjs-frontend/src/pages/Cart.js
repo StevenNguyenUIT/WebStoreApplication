@@ -31,7 +31,7 @@ export const Cart = ({title}) => {
     let cartpage = (
         <div>
             <Main title={title}/>
-            <h2>cart:(itemQuantity:{itemQuantity} , totalAmount: {totalAmount} )&nbsp;</h2>
+            <h2>cart: (itemQuantity: <a id="itemQuantityCartID">{itemQuantity}</a> , totalAmount: <a id="totalAmountCartID">{totalAmount}</a> )&nbsp;</h2>
             <table border={1}>
               <tbody>
                 <tr>
@@ -40,19 +40,21 @@ export const Cart = ({title}) => {
                     <th>quantity</th>
                     <th>unit price</th>
                 </tr>
-                {itemLines.map(item=>(
-                  <tr key={item.productNumber}>
-                      <td>{item.productNumber}</td>
-                      <td>{item.name}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.price}</td>
-                      <td><button onClick={removeItem} value={item.productNumber}>Remove</button></td>
-                  </tr>
-                ))}
+                {itemLines.map(item=>{
+                  let removeId = item.productNumber + "_removeCartID";
+                  return (
+                    <tr key={item.productNumber}>
+                        <td>{item.productNumber}</td>
+                        <td>{item.name}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.price}</td>
+                        <td><button id={removeId} onClick={removeItem} value={item.productNumber}>Remove</button></td>
+                    </tr>
+                )})}
               </tbody>
             </table>
             <br/>
-            <button onClick={onCheckout}>Checkout</button>
+            <button id="checkoutBtnID" onClick={onCheckout}>Checkout</button>
         </div>
     );
     return cartpage;
