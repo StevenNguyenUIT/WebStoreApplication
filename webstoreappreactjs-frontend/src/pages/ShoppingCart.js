@@ -27,6 +27,8 @@ export const ShoppingCart = ({title}) => {
           // console.log(response.data.products);
           // setProductList
           setProductList(response.data.products);
+      }).catch(function (error){
+        alert(error.message);
       })
     }
 
@@ -41,7 +43,9 @@ export const ShoppingCart = ({title}) => {
               if(array[0].products.length===0){
                 setSearchMessage(<a style={{color:"red"}}>No Result</a>);
               }
-          })
+          }).catch(function (error){
+            alert(error.message);
+        })
     }
     
     const addToCart = (e) =>{

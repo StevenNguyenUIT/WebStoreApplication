@@ -25,9 +25,17 @@ public class ProductManagementTest {
     @Before
     public void createWebDriver() {
         // set path to chromedriver.exe
+
+        //use for MacOS
         System.setProperty("webdriver.chrome.driver", "/Users/xhuyen/3_WAA/chromedive/chromedriver-mac-arm64/chromedriver");
+        //use for Windows
+        // System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver-win64\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
+
+        // Use for MacOS
         options.setBinary("/Users/xhuyen/3_WAA/chromedive/chrome-headless-shell-mac-arm64/chrome-headless-shell");
+        // Use for Windows
+        // options.setBinary("C:\\tmp\\chrome-headless-shell-win64\\chrome-headless-shell.exe");
         options.addArguments("--remote-allow-origins=*");
         // create chrome instance
          driver = new ChromeDriver(options);

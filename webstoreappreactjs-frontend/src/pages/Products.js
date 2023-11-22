@@ -29,6 +29,8 @@ export const Products = ({title}) => {
             // console.log(response.data.products);
             // setProductList
             setProductList(response.data.products);
+        }).catch(function (error){
+            alert(error.message);
         })
     }
     const searchProduct = () =>{
@@ -41,6 +43,8 @@ export const Products = ({title}) => {
                 // console.log(array);
                 setProductList(array);
                 setSearchMessage("");
+            }).catch(function (error){
+                alert(error.message);
             })
         } else {
             setSearchMessage(<a style={{color:"red"}}>This Product Number is incorrect, show all</a>);
@@ -65,6 +69,8 @@ export const Products = ({title}) => {
             setMsg("Removed successfully!");
             loadProducts();
             setProduct(cleanproduct);
+        }).catch(function (error){
+            alert(error.message);
         });
     }
 
@@ -79,12 +85,14 @@ export const Products = ({title}) => {
             console.log(product);
             //addProduct(product);
             client.post("http://localhost:8080/api/products", product)
-            .then((response) =>{
-            console.log("added product " + response.data.productNumber );
-            setMsg("Added successfully!");
-            loadProducts();
-            setProduct(cleanproduct);
-        });
+                .then((response) =>{
+                    console.log("added product " + response.data.productNumber );
+                    setMsg("Added successfully!");
+                    loadProducts();
+                    setProduct(cleanproduct);
+                }).catch(function (error){
+                    alert(error.message);
+                });
         }
         
 

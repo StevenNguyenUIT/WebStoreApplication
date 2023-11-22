@@ -22,6 +22,8 @@ export const Orders = ({title}) =>{
         .then((response)=>{
             // console.log(response.data.orderList);
             setOrderList(response.data.orderList)
+        }).catch(function (error){
+            alert(error.message);
         })
     }
     const searchOrder = (value)=>{
@@ -29,6 +31,8 @@ export const Orders = ({title}) =>{
         .then((response)=>{
             // console.log(response.data.orderList);
             setOrderList(response.data.orderList);
+        }).catch(function (error){
+            alert(error.message);
         })
     }
     const searchStatus = () => {
