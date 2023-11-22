@@ -15,6 +15,15 @@ public class ProductAdapter {
         if (dto != null) {
             p = new Product(dto.getProductNumber(), dto.getName(), dto.getPrice(), dto.getDescription(), dto.getNumberInStock());
         }
+        //
+        List<Review> reviewList = new ArrayList<>();
+        List<ReviewDTO> reviewDTOs = dto.getReviewList();
+        if (!reviewDTOs.isEmpty()) {
+            for (ReviewDTO review : reviewDTOs) {
+                reviewList.add(ReviewAdapter.toObj(review));
+            }
+        }
+        p.setReviewList(reviewList);
         return p;
     }
     public static ProductDTO toDto(Product obj) {

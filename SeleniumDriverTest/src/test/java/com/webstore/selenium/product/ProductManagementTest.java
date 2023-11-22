@@ -55,18 +55,14 @@ public class ProductManagementTest {
     public void testRemoveProduct_P1234567890() {
         //page1.enterData("P1234567890", "Green Banana", "3.5", "Fresh Green Banana 2pounds", "10");
         //page1.clickRemoveButton_P1234567890();
-        By textLocator = By.id("P1234567890_removeID");
+        driver.findElement(By.id("P1234567890_removeID")).click();
+
+        By textLocator = By.id("messageID");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement removeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
-        removeButton.click();
-        //
-//        textLocator = By.id("P1234567890_removeID");
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
-//        removeButton.click();
-        //click on the text
-//        String actual  = page1.getResultAfterAdded();
-//        assertThat(actual, is("Removed successfully!"));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textLocator));
+        element.click();
+        //String actual  = page1.getResultAfterAdded();
+        assertThat(element.getText(), is("Removed successfully!"));
 
     }
 
