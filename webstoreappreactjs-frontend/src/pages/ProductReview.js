@@ -69,10 +69,10 @@ export const ProductReview = ({title}) => {
                                 name='message'
                                 onChange={handleFieldChange}
                                 {...register("message",{
-                                    required: "price is required.",
+                                    required: "message is required.",
                                     minLength:{
                                         value:5,
-                                        message: "price should at-least 5 char"
+                                        message: "message should at-least 5 char"
                                     }
                                 })}
                             />

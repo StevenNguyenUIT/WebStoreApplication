@@ -92,9 +92,9 @@ export const OrderDetail = ({title}) => {
             <br/>
             <div>
                 Change Status:
-                <button onClick={()=>MoveToOtherStatus("SHIPPED")}>MoveToSHIPPED</button>
+                <button id="moveToShipBtnID" onClick={()=>MoveToOtherStatus("SHIPPED")}>MoveToSHIPPED</button>
                 &nbsp;
-                <button onClick={()=>MoveToOtherStatus("DELIVERED")}>MoveToDELIVERED</button>
+                <button id="moveToDeliveredBtnID" onClick={()=>MoveToOtherStatus("DELIVERED")}>MoveToDELIVERED</button>
             </div>
 
             <div>

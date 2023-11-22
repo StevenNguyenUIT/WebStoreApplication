@@ -54,6 +54,7 @@ export const Orders = ({title}) =>{
                 <select 
                     type="text"
                     name="status"
+                    id="selectStatusID"
                     value={status}
                     onChange={e=>setStatus(e.target.value)} 
                 >
@@ -62,7 +63,7 @@ export const Orders = ({title}) =>{
                     <option>SHIPPED</option>
                     <option>DELIVERED</option>
                 </select>
-                <button onClick={searchStatus}>Search</button>
+                <button id="searchBtnID" onClick={searchStatus}>Search</button>
             </div>
             <br/>
             <table border={1}>
@@ -70,15 +71,17 @@ export const Orders = ({title}) =>{
                     <tr>
                         <th>OrderID</th><th>Date</th><th>Status</th><th>Total Amount</th>
                     </tr>
-                    {orderList.map((order) => (
+                    {orderList.map((order) => { 
+                        let viewDetailID = order.orderId+ "_detailID";
+                        return (
                         <tr key={order.orderId}>
                             <td>{order.orderId}</td>
                             <td>{order.date}</td>
                             <td>{order.status}</td>
                             <td>{order.totalAmount}</td>
-                            <td><button onClick={viewDetail} value={order.orderId}>View Detail</button></td>
-                        </tr>
-                    ))}
+                            <td><button id={viewDetailID} onClick={viewDetail} value={order.orderId}>View Detail</button></td>
+                        </tr>);})
+                    }
                 </tbody>
             </table>
         </div>
