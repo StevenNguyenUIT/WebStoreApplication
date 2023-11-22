@@ -25,12 +25,13 @@ export const ProductDetail = ({title}) => {
     const {register, handleSubmit, formState: {errors}} = useForm(
         {
             defaultValues: {
-                productNumber: 'P1234532',
+                productNumber: currentProductNumber,
                 name: initProduct[0].name,
                 price: initProduct[0].price,
                 productNumber: initProduct[0].productNumber,
                 numberInStock: initProduct[0].numberInStock,
-                description: initProduct[0].description
+                description: initProduct[0].description,
+                reviewList: initProduct[0].reviewList
             }
         }
     );
