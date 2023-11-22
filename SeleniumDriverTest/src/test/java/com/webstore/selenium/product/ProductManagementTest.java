@@ -68,8 +68,8 @@ public class ProductManagementTest {
       //Back to Products Page
       page1 = page2.clickMenuProductManagement();
       //CLICK REMOVE
-      //page1.clickById("P1234567899_removeID");
-      page1.waitAndGetResultAfterThen("P1234567899_removeID");
+      page1.clickById("P1234567899_removeID");
+      //page1.waitAndGetResultAfterThen("P1234567899_removeID");
       actual = page1.waitAndGetResultAfterThen("messageID");
       assertThat(actual, is("Removed successfully!"));
    }
