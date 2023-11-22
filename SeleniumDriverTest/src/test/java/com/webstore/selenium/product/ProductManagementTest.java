@@ -34,6 +34,9 @@ public class ProductManagementTest {
 
         // Use for MacOS
         options.setBinary("/Users/xhuyen/3_WAA/chromedive/chrome-headless-shell-mac-arm64/chrome-headless-shell");
+        //options.setBinary("/Users/xhuyen/3_WAA/chromedive/NoShell/chrome-mac-arm64/GoogleChromeforTesting.app");
+
+        //options.setBinary("/Users/xhuyen/3_WAA/chromedive/Chrome119/chrome-mac-arm64/GoogleChromeforTesting");
         // Use for Windows
         // options.setBinary("C:\\tmp\\chrome-headless-shell-win64\\chrome-headless-shell.exe");
         options.addArguments("--remote-allow-origins=*");

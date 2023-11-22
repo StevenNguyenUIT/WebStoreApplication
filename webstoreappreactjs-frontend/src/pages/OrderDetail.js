@@ -61,6 +61,7 @@ export const OrderDetail = ({title}) => {
       client.post("http://localhost:8080/api/orders/" + orderId, {status:status})
       .then((response)=>{
         console.log(response);
+        alert(`Updated the Status ${status} successfully!`);
         loadOrder();
       })
     }

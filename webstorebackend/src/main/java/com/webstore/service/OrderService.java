@@ -36,8 +36,10 @@ public class OrderService {
         //update number-in-stock for each of products in the order above
         for (OrderItem item : order.getOrderItemList()) {
             Product p = productRepo.findByProductNumber(item.getProductNumber());
-            p.setNumberInStock(p.getNumberInStock()- item.getQuantity());
-            productRepo.save(p);
+            if(p != null) {
+                p.setNumberInStock(p.getNumberInStock()- item.getQuantity());
+                productRepo.save(p);
+            }
         }
         return orderDTO;
     }

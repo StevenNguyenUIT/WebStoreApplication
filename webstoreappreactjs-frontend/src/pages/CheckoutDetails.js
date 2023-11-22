@@ -27,6 +27,7 @@ export const CheckoutDetails = ({title}) => {
         .then((response) =>{
             console.log("added order " + response.data );
             dispatch({type: 'removecart', item: [], totalAmount:0, itemQuantity:0});
+            alert('The order has been stored to database!');
             navigate('/orders');
         });
     }
