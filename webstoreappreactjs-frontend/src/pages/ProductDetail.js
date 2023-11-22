@@ -3,6 +3,7 @@ import {useLocation} from 'react-router-dom';
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
 import { Main } from "./Main";
+import '../App.css';
 
 export const ProductDetail = ({title}) => {
     const location = useLocation();
@@ -20,7 +21,7 @@ export const ProductDetail = ({title}) => {
         reviewList: initProduct[0].reviewList
     });
     const [currentProduct, setCurrentProduct] = useState(initialProduct);
-
+    const [msg, setMsg] = useState('');
     //validate react-hook-form
     const {register, handleSubmit, formState: {errors}} = useForm(
         {
@@ -62,6 +63,7 @@ export const ProductDetail = ({title}) => {
         client.put("/" + currentProductNumber,currentProduct)
         .then((response)=>{
             console.log(response);
+            setMsg("Updated successfully!");
             loadProduct();
         })
     }
@@ -73,7 +75,7 @@ export const ProductDetail = ({title}) => {
                     <tbody>
                         <tr>
                             <td>Product Number:</td>
-                            <td>{initialProduct.productNumber}</td>
+                            <td id="productNumberTextID">{initialProduct.productNumber}</td>
                             <td></td>
                         </tr>
                         <tr>
@@ -100,7 +102,7 @@ export const ProductDetail = ({title}) => {
                                 {...register("price",{
                                     required: "price is required.",
                                     pattern:{
-                                        value: /^[0-9]{1,}$/,
+                                        value: /^[0-9]+([,\.][0-9]+)?$/,
                                         message: "please input number"
                                     },
                                     min:{
@@ -151,7 +153,8 @@ export const ProductDetail = ({title}) => {
                     </tbody>
                 </table>
                 <br/>
-                <button type="submit">Update</button>
+                <button id="updateBtnID" type="submit">Update</button>
+                <p id="messageID" className="success_msg">{msg}</p>
                 <hr/>
                 <table >
                     <tbody>

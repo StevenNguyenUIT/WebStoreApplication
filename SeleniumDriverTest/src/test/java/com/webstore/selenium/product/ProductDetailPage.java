@@ -1,6 +1,8 @@
 package com.webstore.selenium.product;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ProductDetailPage {
@@ -13,5 +15,12 @@ public class ProductDetailPage {
         this.driver.quit();
     }
     //fields
+    @FindBy(id = "productNumberTextID")
+    public WebElement textProductNumber;
+
+    public String getProductNumberDisplay() {
+        return textProductNumber.getText();
+    }
+
 
 }

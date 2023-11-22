@@ -139,6 +139,7 @@ export const Products = ({title}) => {
                 </table>
 
                 <h1>Add a new Product</h1>
+                <p id="messageID" className="success_msg">{msg}</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <table>
                         <tbody>
@@ -245,7 +246,7 @@ export const Products = ({title}) => {
                         </tbody>
                     </table>
                 </form>
-                <h4 id="messageID">{msg}</h4>
+                
             </div>
         </div>
     );
