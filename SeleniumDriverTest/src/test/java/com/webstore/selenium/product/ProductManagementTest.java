@@ -1,5 +1,6 @@
 package com.webstore.selenium.product;
 
+import com.webstore.selenium.Utils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,16 +27,8 @@ public class ProductManagementTest {
     public void createWebDriver() {
         // set path to chromedriver.exe
         ChromeOptions options = new ChromeOptions();
-
-        //use for MacOS
-        System.setProperty("webdriver.chrome.driver", "/Users/xhuyen/3_WAA/chromedive/chromedriver-mac-arm64/chromedriver");
-        options.setBinary("/Users/xhuyen/3_WAA/chromedive/chrome-headless-shell-mac-arm64/chrome-headless-shell");
-
-        // use for Windows
-        // System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver-win64\\chromedriver.exe");
-        // options.setBinary("C:\\tmp\\chrome-headless-shell-win64\\chrome-headless-shell.exe");
-
-
+        System.setProperty("webdriver.chrome.driver", Utils.getDriverURL());
+        options.setBinary(Utils.getBinaryURL());
         options.addArguments("--remote-allow-origins=*");
         // create chrome instance
          driver = new ChromeDriver(options);
