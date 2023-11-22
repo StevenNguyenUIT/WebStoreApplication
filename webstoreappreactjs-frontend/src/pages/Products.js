@@ -84,7 +84,6 @@ export const Products = ({title}) => {
             setMsg("Added successfully!");
             loadProducts();
             setProduct(cleanproduct);
-            
         });
         }
         

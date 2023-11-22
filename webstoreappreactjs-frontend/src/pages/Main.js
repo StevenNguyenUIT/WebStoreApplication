@@ -20,9 +20,9 @@ export const Main = ({title}) => {
         <div className="App">
             <div>
                 <br/>
-                <button onClick={navigateToProducts}>Link to Products</button>
-                <button onClick={navigateToOrders}>Link to Orders</button>
-                <button onClick={navigatetoShopping}>Link to ShoppingCart</button>
+                <button id="menuProductID" onClick={navigateToProducts}>Products Management</button>
+                <button id="menuOrderID" onClick={navigateToOrders}>Orders Management</button>
+                <button id="menuShoppingID"  onClick={navigatetoShopping}>ShoppingCart</button>
                 <h1>{title}</h1>
                 <hr/>
             </div>
